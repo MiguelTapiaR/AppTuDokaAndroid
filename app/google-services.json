@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "454790891606",
+    "firebase_url": "https://tudoka-1deed.firebaseio.com",
+    "project_id": "tudoka-1deed",
+    "storage_bucket": "tudoka-1deed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454790891606:android:91687590eafcc693",
+        "android_client_info": {
+          "package_name": "com.panteranegra.apptudoka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454790891606-iffdhi7t9ohj837abomiua73gmnnsg4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.panteranegra.apptudoka",
+            "certificate_hash": "1c6eb4da68fd34824ede0a473d3b3c55ba0a5cce"
+          }
+        },
+        {
+          "client_id": "454790891606-geau20dad4uo3v1trv1fb8uinmgucl8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEAhd1E1U_77Q_NrlRVQbEe5Ebspm-Gjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454790891606-geau20dad4uo3v1trv1fb8uinmgucl8v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "454790891606-cdk9p0f7t1flo5da43uqvosvbuviud49.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panteraNegra.TuDoka"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454790891606:android:5419bb40139d5b80",
+        "android_client_info": {
+          "package_name": "com.panteranegra.tudoka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454790891606-1qhft79jio0u55g4ekio6m9pe24ufslj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.panteranegra.tudoka",
+            "certificate_hash": "1c6eb4da68fd34824ede0a473d3b3c55ba0a5cce"
+          }
+        },
+        {
+          "client_id": "454790891606-geau20dad4uo3v1trv1fb8uinmgucl8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEAhd1E1U_77Q_NrlRVQbEe5Ebspm-Gjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454790891606-geau20dad4uo3v1trv1fb8uinmgucl8v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "454790891606-cdk9p0f7t1flo5da43uqvosvbuviud49.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panteraNegra.TuDoka"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
