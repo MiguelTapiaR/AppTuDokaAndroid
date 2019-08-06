@@ -36,8 +36,8 @@ public class ReporteDevolucion {
     }
 
     private Uri fotoLicencia;
-   /* private  fotoPlaca UIImage
-    private  fotoTracto UIImage
+    private  Uri fotoPlaca;
+    /*private  fotoTracto UIImage
     private  fotoDocumentoDevolucion UIImage
     private  urlfotoLicencia String
     private  urlfotoPlaca String
