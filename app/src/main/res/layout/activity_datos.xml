@@ -48,10 +48,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner2" />
+            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_codigo_item" />
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner3"
+            android:id="@+id/searchable_spinner_numero_item"
             android:layout_width="325dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"
@@ -76,7 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_nombre_item" />
 
 
         <TextView
@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/searchable_spinner4" />
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner"
+            android:id="@+id/searchable_spinner_nombre_item"
             android:layout_width="325dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"
@@ -104,13 +104,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
             tools:ignore="MissingConstraints">
-
-
         </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
 
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner2"
+            android:id="@+id/searchable_spinner_codigo_item"
             android:layout_width="325dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"
@@ -185,7 +183,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.603"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner3" />
+            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_numero_item" />
 
 
     </android.support.constraint.ConstraintLayout>

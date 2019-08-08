@@ -11,11 +11,7 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,10 +34,10 @@ public class DatosActivity extends AppCompatActivity implements IfFirebaseLoadDo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
-        searchableSpinnerNomCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner);
-        searchableSpinnerNoCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner2);
+        searchableSpinnerNomCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
+        searchableSpinnerNoCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
         searchableSpinnerNomProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner4);
-        searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner3);
+        searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
         guardarBtn = findViewById(R.id.guardar_datos);
 
         guardarBtn.setOnClickListener(new View.OnClickListener() {

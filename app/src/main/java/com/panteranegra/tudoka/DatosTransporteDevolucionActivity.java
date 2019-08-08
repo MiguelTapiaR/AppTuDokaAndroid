@@ -40,6 +40,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
     ImageView imagen_documento_cliente;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     ReporteDevolucion reporte;
+    private Button continuarBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         setContentView(R.layout.activity_datos_transporte_devolucion);
+
 
         if (ContextCompat.checkSelfPermission(DatosTransporteDevolucionActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -85,6 +87,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
         btn_tomar_foto_tracto_lateral_2 = (Button) this.findViewById(R.id.fotoTractoLateral2Btn);
         btn_tomar_foto_tracto_parte_trasera = (Button) this.findViewById(R.id.fotoTractoTraseraBtn);
         btn_tomar_foto_documento_cliente = (Button) this.findViewById(R.id.fotoDocumentoClienteBtn);
+        continuarBtn = findViewById(R.id.datosTransporteContinuarBtn);
 
         //Añadir el listener al Boton foto licencia
         btn_tomar_foto_licencia.setOnClickListener(new View.OnClickListener() {
@@ -282,6 +285,17 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
             }
         });
 
+        // Añadir listener al boton Continuar
+        continuarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AgregarItemDevolucionActivity.class);
+                //para pasar el modelo
+                intent.putExtra("reporte",reporte);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -342,6 +356,8 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 }
 
         }
+
+
     }
 
 

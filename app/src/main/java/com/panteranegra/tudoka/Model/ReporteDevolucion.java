@@ -2,7 +2,9 @@ package com.panteranegra.tudoka.Model;
 
 import android.net.Uri;
 
-public class ReporteDevolucion {
+import java.io.Serializable;
+
+public class ReporteDevolucion implements Serializable {
     private Cliente cliente;
     private Proyecto proyecto;
     private Uri fotoLicencia;
@@ -12,7 +14,15 @@ public class ReporteDevolucion {
     private Uri fotoTractoLateral2;
     private Uri fotoTractoParteTrasera;
     private Uri fotoDocumentoCliente;
+    private Uri fotoItem;
 
+    public Uri getFotoItem() {
+        return fotoItem;
+    }
+
+    public void setFotoItem(Uri fotoItem) {
+        this.fotoItem = fotoItem;
+    }
 
     public ReporteDevolucion() {
     }
