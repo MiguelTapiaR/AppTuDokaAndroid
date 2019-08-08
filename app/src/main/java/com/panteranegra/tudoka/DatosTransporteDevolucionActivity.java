@@ -25,7 +25,19 @@ import java.io.File;
 public class DatosTransporteDevolucionActivity extends AppCompatActivity {
 
     Button btn_tomar_foto_licencia;
+    Button btn_tomar_foto_placa_delantera;
+    Button btn_tomar_foto_placa_trasera;
+    Button btn_tomar_foto_tracto_lateral_1;
+    Button btn_tomar_foto_tracto_lateral_2;
+    Button btn_tomar_foto_tracto_parte_trasera;
+    Button btn_tomar_foto_documento_cliente;
     ImageView imagen_licencia;
+    ImageView imagen_placa_delanera;
+    ImageView imagen_placa_trasera;
+    ImageView imagen_tracto_lateral1;
+    ImageView imagen_tracto_lateral2;
+    ImageView imagen_tracto_parte_trasera;
+    ImageView imagen_documento_cliente;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     ReporteDevolucion reporte;
 
@@ -60,13 +72,25 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
 
         //Relacionar con el XML
         imagen_licencia = (ImageView) this.findViewById(R.id.imageLicencia);
+        imagen_placa_delanera = (ImageView) this.findViewById(R.id.imagePlacaDelantera);
+        imagen_placa_trasera = (ImageView) this.findViewById(R.id.imagePlacaTrasera);
+        imagen_tracto_lateral1 = (ImageView) this.findViewById(R.id.imageTractoLateral1);
+        imagen_tracto_lateral2 = (ImageView) this.findViewById(R.id.imageTractoLateral2);
+        imagen_tracto_parte_trasera = (ImageView) this.findViewById(R.id.imageTractoParteTrasera);
+        imagen_documento_cliente = (ImageView) this.findViewById(R.id.imageDocumentoCliente);
         btn_tomar_foto_licencia = (Button) this.findViewById(R.id.fotoLicenciaBtn);
+        btn_tomar_foto_placa_delantera = (Button) this.findViewById(R.id.fotoPlacaDelanteraBtn);
+        btn_tomar_foto_placa_trasera = (Button) this.findViewById(R.id.fotoPlacaTraseraBtn);
+        btn_tomar_foto_tracto_lateral_1 = (Button) this.findViewById(R.id.fotoTractoLateral1Btn);
+        btn_tomar_foto_tracto_lateral_2 = (Button) this.findViewById(R.id.fotoTractoLateral2Btn);
+        btn_tomar_foto_tracto_parte_trasera = (Button) this.findViewById(R.id.fotoTractoTraseraBtn);
+        btn_tomar_foto_documento_cliente = (Button) this.findViewById(R.id.fotoDocumentoClienteBtn);
 
-        //Añadir el listener Boton
+        //Añadir el listener al Boton foto licencia
         btn_tomar_foto_licencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // creamos el Intent para llamara a la camara
+                // creamos el Intent para llamar a la camara
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
                 //crear carpeta en la memoria del terminal
@@ -90,18 +114,233 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
             }
         });
 
+        //Añadir el listener al Boton foto placa delantera
+        btn_tomar_foto_placa_delantera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creamos el Intent para llamar a la camara
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                //crear carpeta en la memoria del terminal
+                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
+                imagenesDoka.mkdirs();
+
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+
+                //añadir el nombre de la imagen
+                File image = new File(imagenesDoka, ts+".jpg");
+                Uri uriSavedImage = Uri.fromFile(image);
+
+                reporte.setFotoPlacaDelantera(uriSavedImage);
+
+                //Le decimos al intent que queremos grabar la imagen
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+                //Lanzamos la aplicacion de la camara con retorno (forResult)
+                startActivityForResult(cameraIntent, 2);
+            }
+        });
+
+        //Añadir el listener al Boton foto placa trasera
+        btn_tomar_foto_placa_trasera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creamos el Intent para llamar a la camara
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                //crear carpeta en la memoria del terminal
+                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
+                imagenesDoka.mkdirs();
+
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+
+                //añadir el nombre de la imagen
+                File image = new File(imagenesDoka, ts+".jpg");
+                Uri uriSavedImage = Uri.fromFile(image);
+
+                reporte.setFotoPlacaTrasera(uriSavedImage);
+
+                //Le decimos al intent que queremos grabar la imagen
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+                //Lanzamos la aplicacion de la camara con retorno (forResult)
+                startActivityForResult(cameraIntent, 3);
+            }
+        });
+
+        //Añadir el listener al Boton tracto lateral 1
+        btn_tomar_foto_tracto_lateral_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creamos el Intent para llamar a la camara
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                //crear carpeta en la memoria del terminal
+                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
+                imagenesDoka.mkdirs();
+
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+
+                //añadir el nombre de la imagen
+                File image = new File(imagenesDoka, ts+".jpg");
+                Uri uriSavedImage = Uri.fromFile(image);
+
+                reporte.setFotoTractoLateral1(uriSavedImage);
+
+                //Le decimos al intent que queremos grabar la imagen
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+                //Lanzamos la aplicacion de la camara con retorno (forResult)
+                startActivityForResult(cameraIntent, 4);
+            }
+        });
+
+        //Añadir el listener al Boton tracto lateral 2
+        btn_tomar_foto_tracto_lateral_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creamos el Intent para llamar a la camara
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                //crear carpeta en la memoria del terminal
+                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
+                imagenesDoka.mkdirs();
+
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+
+                //añadir el nombre de la imagen
+                File image = new File(imagenesDoka, ts+".jpg");
+                Uri uriSavedImage = Uri.fromFile(image);
+
+                reporte.setFotoTractoLateral2(uriSavedImage);
+
+                //Le decimos al intent que queremos grabar la imagen
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+                //Lanzamos la aplicacion de la camara con retorno (forResult)
+                startActivityForResult(cameraIntent, 5);
+            }
+        });
+
+        //Añadir el listener al Boton tracto parte Trasera
+        btn_tomar_foto_tracto_parte_trasera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creamos el Intent para llamar a la camara
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                //crear carpeta en la memoria del terminal
+                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
+                imagenesDoka.mkdirs();
+
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+
+                //añadir el nombre de la imagen
+                File image = new File(imagenesDoka, ts+".jpg");
+                Uri uriSavedImage = Uri.fromFile(image);
+
+                reporte.setFotoTractoParteTrasera(uriSavedImage);
+
+                //Le decimos al intent que queremos grabar la imagen
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+                //Lanzamos la aplicacion de la camara con retorno (forResult)
+                startActivityForResult(cameraIntent, 6);
+            }
+        });
+
+        //Añadir el listener al Boton Documento Cliente
+        btn_tomar_foto_documento_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creamos el Intent para llamar a la camara
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                //crear carpeta en la memoria del terminal
+                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
+                imagenesDoka.mkdirs();
+
+                Long tsLong = System.currentTimeMillis()/1000;
+                String ts = tsLong.toString();
+
+                //añadir el nombre de la imagen
+                File image = new File(imagenesDoka, ts+".jpg");
+                Uri uriSavedImage = Uri.fromFile(image);
+
+                reporte.setFotoDocumentoCliente(uriSavedImage);
+
+                //Le decimos al intent que queremos grabar la imagen
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+
+                //Lanzamos la aplicacion de la camara con retorno (forResult)
+                startActivityForResult(cameraIntent, 7);
+            }
+        });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // Comprobar que la foto se realizo
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
-            Bitmap bMap = BitmapFactory.decodeFile(
-                    reporte.getFotoLicencia().getEncodedPath() );
+        if ( resultCode == RESULT_OK) {
+            Bitmap bMap;
+                switch (requestCode){
+                    case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                                bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoLicencia().getEncodedPath() );
 
-            //Añadimos el bitmap al imageView para mostrarlo por pantalla
-            imagen_licencia.setImageBitmap(bMap);
+                                //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                imagen_licencia.setImageBitmap(bMap);
+                                break;
+                    case 2:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                                bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoPlacaDelantera().getEncodedPath() );
+
+                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                 imagen_placa_delanera.setImageBitmap(bMap);
+                                 break;
+                    case 3:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                        bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoPlacaTrasera().getEncodedPath() );
+
+                                //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                imagen_placa_trasera.setImageBitmap(bMap);
+                                break;
+                    case 4:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                        bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoTractoLateral1().getEncodedPath() );
+
+                                //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                imagen_tracto_lateral1.setImageBitmap(bMap);
+                                break;
+                    case 5:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                        bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoTractoLateral2().getEncodedPath() );
+
+                                //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                imagen_tracto_lateral2.setImageBitmap(bMap);
+                                break;
+                    case 6:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                                bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoTractoParteTrasera().getEncodedPath() );
+
+                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                imagen_tracto_parte_trasera.setImageBitmap(bMap);
+                                break;
+                    case 7:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
+                        bMap = BitmapFactory.decodeFile(
+                                reporte.getFotoDocumentoCliente().getEncodedPath() );
+
+                                //Añadimos el bitmap al imageView para mostrarlo por pantalla
+                                imagen_documento_cliente.setImageBitmap(bMap);
+                                 break;
+                }
+
         }
     }
 

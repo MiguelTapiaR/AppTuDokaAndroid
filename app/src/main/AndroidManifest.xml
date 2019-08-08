@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.panteranegra.tudoka">
 
@@ -16,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DatosTransporteDevolucionActivity"></activity>
+        <activity android:name=".AgregarItemDevolucionActivity"></activity>
+        <activity android:name=".DatosTransporteDevolucionActivity" />
         <activity android:name=".MostrarActivity" />
-        <activity android:name=".DatosActivity"></activity>
+        <activity android:name=".DatosActivity" />
         <activity android:name=".MenuActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
