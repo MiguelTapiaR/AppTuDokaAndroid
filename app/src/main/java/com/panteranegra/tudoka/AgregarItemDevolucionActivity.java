@@ -51,11 +51,13 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         //recibir el modelo
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
 
+        Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
+        startActivity(intent);
 
         // Relacioinar con el xml
 
         btn_tomar_foto_item = (Button) this.findViewById(R.id.fotoItemBtn);
-        imagen_item = (ImageView) this.findViewById(R.id.imageViewItem);
+        imagen_item = (ImageView) this.findViewById(R.id.imageViewFotoItem);
 
         // Añadir el listener al boton foto item
         btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
@@ -161,4 +163,5 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
     public void onFirebaseLoadSucces(List<Pieza> piezaList) {
 
     }
+
 }

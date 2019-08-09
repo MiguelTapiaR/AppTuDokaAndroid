@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VistaItemActivity">
+
+    <TextView
+        android:id="@+id/textViewNombreItem"
+        android:layout_width="416dp"
+        android:layout_height="22dp"
+        android:background="#FFE600"
+        android:gravity="center"
+        android:text="Nombre Item"
+        android:textColor="#004a8e"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-2dp" />
+
+    <TextView
+        android:id="@+id/textViewCoodigoItem"
+        android:layout_width="416dp"
+        android:layout_height="17dp"
+        android:background="#FFE600"
+        android:gravity="center"
+        android:text="Codigo Item"
+        android:textColor="#004a8e"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreItem"
+        tools:layout_editor_absoluteX="-3dp" />
+
+    <ImageView
+        android:id="@+id/imageViewFotoItem"
+        android:layout_width="239dp"
+        android:layout_height="164dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUnidadesItem"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="111dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="8dp"
+        android:background="#FA204B"
+        android:text="Eliminar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.379"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFotoItem"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUnidadesItem" />
+
+    <TextView
+        android:id="@+id/textViewUnidadesItem"
+        android:layout_width="416dp"
+        android:layout_height="22dp"
+        android:background="#FFE600"
+        android:gravity="center"
+        android:text="Unidaes"
+        android:textColor="#004a8e"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCoodigoItem"
+        tools:layout_editor_absoluteX="-1dp" />
+</android.support.constraint.ConstraintLayout>
