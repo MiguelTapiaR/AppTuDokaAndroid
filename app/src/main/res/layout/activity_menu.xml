@@ -18,7 +18,7 @@
     tools:context=".MenuActivity">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/reporte_obra"
         android:layout_width="307dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -31,10 +31,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/reporte_dano" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/reporte_dano"
         android:layout_width="302dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -47,10 +47,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/reporte_devolucion" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/reporte_devolucion"
         android:layout_width="302dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
