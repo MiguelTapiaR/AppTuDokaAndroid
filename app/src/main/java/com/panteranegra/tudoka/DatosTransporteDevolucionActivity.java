@@ -40,7 +40,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
     ImageView imagen_documento_cliente;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     ReporteDevolucion reporte;
-    private Button continuarBtn;
+    private Button btn_continuar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
         btn_tomar_foto_tracto_lateral_2 = (Button) this.findViewById(R.id.fotoTractoLateral2Btn);
         btn_tomar_foto_tracto_parte_trasera = (Button) this.findViewById(R.id.fotoTractoTraseraBtn);
         btn_tomar_foto_documento_cliente = (Button) this.findViewById(R.id.fotoDocumentoClienteBtn);
-        continuarBtn = findViewById(R.id.datosTransporteContinuarBtn);
+        btn_continuar = findViewById(R.id.datosTransporteContinuarBtn);
 
         //Añadir el listener al Boton foto licencia
         btn_tomar_foto_licencia.setOnClickListener(new View.OnClickListener() {
@@ -286,7 +286,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
         });
 
         // Añadir listener al boton Continuar
-        continuarBtn.setOnClickListener(new View.OnClickListener() {
+        btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AgregarItemDevolucionActivity.class);

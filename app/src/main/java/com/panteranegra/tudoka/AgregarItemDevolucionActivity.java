@@ -35,6 +35,7 @@ import java.util.List;
 public class AgregarItemDevolucionActivity extends AppCompatActivity implements IfFirebaseLoadDonePieza {
 
     Button btn_tomar_foto_item;
+    Button btn_continuar;
     ImageView imagen_item;
     ReporteDevolucion reporte;
     SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
@@ -51,13 +52,14 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         //recibir el modelo
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
 
-        Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
-        startActivity(intent);
+       // Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
+        //startActivity(intent);
 
         // Relacioinar con el xml
 
         btn_tomar_foto_item = (Button) this.findViewById(R.id.fotoItemBtn);
         imagen_item = (ImageView) this.findViewById(R.id.imageViewFotoItem);
+        btn_continuar = (Button) this.findViewById(R.id.continuar_btn);
 
         // Añadir el listener al boton foto item
         btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +103,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
 
-                                alPieza.add(new Pieza("","tuerca","",""));
+                                alPieza.add(new Pieza("","tuerca","","",""));
                             }
                             onFirebaseLoadSuccess(alPieza);
                         } else {
@@ -109,6 +111,16 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                         }
                     }
                 });
+
+        // Añadir listener al boton Continuar
+        btn_continuar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
+
+                startActivity(intent);
+            }
+        });
 
 
 
