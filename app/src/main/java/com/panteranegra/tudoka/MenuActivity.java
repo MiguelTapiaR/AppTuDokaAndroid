@@ -9,19 +9,32 @@ import android.widget.Button;
 public class MenuActivity extends AppCompatActivity {
 
     private Button envioBtn;
+    private Button devolucionBtn;
     private String cadena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        // Botones
         envioBtn = findViewById(R.id.reporte_envio);
-        cadena = "hola";
+        devolucionBtn = findViewById(R.id.reporte_devolucion);
+
+
         envioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DatosEnvioActivity.class);
+
+                startActivity(intent);
+            }
+        });
+        devolucionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DatosActivity.class);
-                cadena = "adios";
+
                 startActivity(intent);
             }
         });

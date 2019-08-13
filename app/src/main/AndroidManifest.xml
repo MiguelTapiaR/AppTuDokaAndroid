@@ -20,6 +20,9 @@
         <activity android:name=".MostrarActivity" />
         <activity android:name=".DatosActivity" />
         <activity android:name=".MenuActivity" />
+        <activity android:name=".DatosEnvioActivity" />
+        <activity android:name=".MostrarDatosEnvioActivity" />
+        <activity android:name=".AgregarItemEnvioActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />

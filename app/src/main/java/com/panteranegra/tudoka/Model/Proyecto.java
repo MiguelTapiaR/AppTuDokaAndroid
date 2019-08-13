@@ -1,6 +1,8 @@
 package com.panteranegra.tudoka.Model;
 
-public class Proyecto {
+import java.io.Serializable;
+
+public class Proyecto implements Serializable {
     public String getKeyCliente() {
         return keyCliente;
     }

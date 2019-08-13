@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,24 +22,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.panteranegra.tudoka.Interface.IfFirebaseLoadDonePieza;
-import com.panteranegra.tudoka.Model.Cliente;
 import com.panteranegra.tudoka.Model.Pieza;
-import com.panteranegra.tudoka.Model.Proyecto;
 import com.panteranegra.tudoka.Model.ReporteDevolucion;
+import com.panteranegra.tudoka.Model.ReporteEnvio;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgregarItemDevolucionActivity extends AppCompatActivity implements IfFirebaseLoadDonePieza {
+public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFirebaseLoadDonePieza {
 
     Button btn_tomar_foto_item;
-    Button btn_continuar;
     ImageView imagen_item;
-    ReporteDevolucion reporte;
+    ReporteEnvio reporte;
     SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
-    Pieza pieza;
+    private ArrayList<Pieza> alPieza;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +46,25 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
         searchableSpinnerUnidadesItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
-        String  newString;
+
+        alPieza = new ArrayList<>();
 
         //recibir el modelo
-        reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
+        reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
 
-       // Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
-        //startActivity(intent);
+
 
         // Relacioinar con el xml
 
         btn_tomar_foto_item = (Button) this.findViewById(R.id.fotoItemBtn);
         imagen_item = (ImageView) this.findViewById(R.id.imageViewFotoItem);
-        btn_continuar = (Button) this.findViewById(R.id.continuar_btn);
 
         // Añadir el listener al boton foto item
         btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // creamos el Intent para llamar a la camara
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                 //crear carpeta en la memoria del terminal
                 File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
@@ -93,7 +90,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
 
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final ArrayList<Pieza> alPieza = new ArrayList<>();
+
         db.collection("material")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -104,9 +101,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
 
-
-                                alPieza.add(new Pieza("","tuerca","",""));
-
+                                alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
                             }
                             onFirebaseLoadSuccess(alPieza);
                         } else {
@@ -114,15 +109,6 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                         }
                     }
                 });
-
-        // Añadir listener al boton Continuar
-        btn_continuar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
 

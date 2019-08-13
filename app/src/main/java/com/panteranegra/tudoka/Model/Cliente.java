@@ -1,6 +1,8 @@
 package com.panteranegra.tudoka.Model;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
     private String key, nombre, numero, pais;
 
     public Cliente() {
