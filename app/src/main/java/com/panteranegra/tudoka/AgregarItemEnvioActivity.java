@@ -1,6 +1,8 @@
 package com.panteranegra.tudoka;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -9,6 +11,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,26 +35,29 @@ import com.panteranegra.tudoka.Model.ReporteEnvio;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFirebaseLoadDonePieza {
 
-    Button btn_tomar_foto_item, continuarBtn;
+    Button fotoItemBtn, continuarBtn;
     EditText unidadesET;
-    ImageView imagen_item;
+    ImageView imageViewFotoItem;
     ReporteEnvio reporte;
     SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
     private ArrayList<Pieza> alPieza;
     private Pieza piezaSeleccionada;
+    final int MY_PERMISSIONS_REQUEST = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_item_devolucion);
-        searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
-        searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
-        searchableSpinnerUnidadesItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
+        setContentView(R.layout.activity_agregar_item_envio);
+
+        searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item_envio);
+        searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item_envio);
+
 
         unidadesET = findViewById(R.id.unidades_envio);
 
@@ -64,11 +71,35 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
 
         // Relacioinar con el xml
 
-        btn_tomar_foto_item = (Button) this.findViewById(R.id.fotoItemBtn);
-        imagen_item = (ImageView) this.findViewById(R.id.imageViewFotoItem);
+        fotoItemBtn = (Button) this.findViewById(R.id.foto_item_envio_btn);
+        imageViewFotoItem = (ImageView) this.findViewById(R.id.imagen_foto_envio);
 
-        // Añadir el listener al boton foto item
-        btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
+
+        if (ContextCompat.checkSelfPermission(AgregarItemEnvioActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AgregarItemEnvioActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(AgregarItemEnvioActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST);
+            } else {
+
+                ActivityCompat.requestPermissions(AgregarItemEnvioActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST);
+            }
+        } else {
+            // Permission has already been granted
+            // Añadir el listener al boton foto item
+
+        }
+
+
+        fotoItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // creamos el Intent para llamar a la camara
@@ -83,20 +114,21 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
 
                 //añadir el nombre de la imagen
                 File image = new File(imagenesDoka, ts+".jpg");
-                Uri uriSavedImage = Uri.fromFile(image);
+                Uri myImagesdir = Uri.parse("content://" + image );
+                //Uri uriSavedImage = Uri.fromFile(image);
 
-                piezaSeleccionada.setFotoItemResumen(uriSavedImage);
+                piezaSeleccionada.setFotoItemResumen(myImagesdir);
 
                 //Le decimos al intent que queremos grabar la imagen
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, myImagesdir);
+                cameraIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
 
                 //Lanzamos la aplicacion de la camara con retorno (forResult)
                 startActivityForResult(cameraIntent, 1);
             }
         });
-
-
-        continuarBtn = findViewById(R.id.continuar_btn);
+        continuarBtn = findViewById(R.id.continuar_envio_btn);
         continuarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,9 +223,15 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                 case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                     bMap = BitmapFactory.decodeFile(
                             piezaSeleccionada.getFotoItemResumen().getEncodedPath());
+                    try {
+                        bMap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), piezaSeleccionada.getFotoItemResumen());
+                        imageViewFotoItem.setImageBitmap(bMap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                     //Añadimos el bitmap al imageView para mostrarlo por pantalla
-                    imagen_item.setImageBitmap(bMap);
+
                     break;
             }
         }}
@@ -202,5 +240,6 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
     public void onFirebaseLoadSucces(List<Pieza> piezaList) {
 
     }
+
 
 }
