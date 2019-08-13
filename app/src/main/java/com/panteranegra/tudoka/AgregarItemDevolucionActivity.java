@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,7 +49,32 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
         searchableSpinnerUnidadesItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
+        searchableSpinnerNomItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
+                //pieza =
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        searchableSpinnerCodigoItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        searchableSpinnerUnidadesItem.getSelectedItem();
         String  newString;
+        pieza = new Pieza();
 
 
         //recibir el modelo
@@ -81,7 +107,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoItem(uriSavedImage);
+                pieza.setFotoItemResumen(uriSavedImage);
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -166,7 +192,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
             switch (requestCode) {
                 case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                     bMap = BitmapFactory.decodeFile(
-                            reporte.getFotoItem().getEncodedPath());
+                            pieza.getFotoItemResumen().getEncodedPath());
 
                     //Añadimos el bitmap al imageView para mostrarlo por pantalla
                     imagen_item.setImageBitmap(bMap);
