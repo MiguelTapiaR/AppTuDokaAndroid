@@ -117,7 +117,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                 Uri myImagesdir = Uri.parse("content://" + image );
                 //Uri uriSavedImage = Uri.fromFile(image);
 
-                piezaSeleccionada.setFotoItemResumen(myImagesdir);
+                piezaSeleccionada.setFotoItemResumen(myImagesdir.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, myImagesdir);
@@ -222,13 +222,9 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
             switch (requestCode) {
                 case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                     bMap = BitmapFactory.decodeFile(
-                            piezaSeleccionada.getFotoItemResumen().getEncodedPath());
-                    try {
-                        bMap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), piezaSeleccionada.getFotoItemResumen());
-                        imageViewFotoItem.setImageBitmap(bMap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                            piezaSeleccionada.getFotoItemResumen());
+                    imageViewFotoItem.setImageURI(Uri.parse(piezaSeleccionada.getFotoItemResumen()));
+                    imageViewFotoItem.setImageBitmap(bMap);
 
                     //Añadimos el bitmap al imageView para mostrarlo por pantalla
 
