@@ -143,8 +143,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fotoItemBtn" />
 
-    <TextView
-        android:id="@+id/textView31"
+    <EditText
+        android:id="@+id/unidades_envio"
         android:layout_width="267dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
