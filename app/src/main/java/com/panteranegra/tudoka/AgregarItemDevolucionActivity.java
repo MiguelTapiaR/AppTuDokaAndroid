@@ -39,6 +39,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
     ImageView imagen_item;
     ReporteDevolucion reporte;
     SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
+    Pieza pieza;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
 
-                                alPieza.add(new Pieza("","tuerca","","",""));
+                                alPieza.add(new Pieza("","tuerca","",""));
                             }
                             onFirebaseLoadSuccess(alPieza);
                         } else {
