@@ -2,10 +2,13 @@ package com.panteranegra.tudoka.Model;
 
 import android.net.Uri;
 
-public class Pieza {
-    private Uri fotoItemResumen;
+import java.io.Serializable;
+
+public class Pieza implements Serializable {
+    private String fotoItemResumen;
     private String id, descripcion, codigo, pais;
     private int unidades;
+
 
     public Pieza(){
 
@@ -61,11 +64,11 @@ public class Pieza {
         this.pais = pais;
     }
 
-    public Uri getFotoItemResumen() {
+    public String getFotoItemResumen() {
         return fotoItemResumen;
     }
 
-    public void setFotoItemResumen(Uri fotoItemResumen) {
+    public void setFotoItemResumen(String fotoItemResumen) {
         this.fotoItemResumen = fotoItemResumen;
     }
 }

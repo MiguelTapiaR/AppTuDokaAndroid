@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,20 +41,23 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
     ImageView imagen_item;
     ReporteDevolucion reporte;
     SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
-    Pieza pieza;
+    private Pieza piezaSeleccionada;
+    private ArrayList<Pieza> alPieza;
+    //TextInputEditText numUnidadesDevueltas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_item_devolucion);
+        alPieza = new ArrayList<>();
         searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
         searchableSpinnerUnidadesItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
         searchableSpinnerNomItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                //pieza =
 
+                piezaSeleccionada = alPieza.get(posicion);
             }
 
             @Override
@@ -63,8 +67,8 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         });
         searchableSpinnerCodigoItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
+                piezaSeleccionada = alPieza.get(posicion);
             }
 
             @Override
@@ -72,9 +76,9 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
 
             }
         });
-        searchableSpinnerUnidadesItem.getSelectedItem();
+
         String  newString;
-        pieza = new Pieza();
+
 
 
         //recibir el modelo
@@ -88,6 +92,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         btn_tomar_foto_item = (Button) this.findViewById(R.id.fotoItemBtn);
         imagen_item = (ImageView) this.findViewById(R.id.imageViewFotoItem);
         btn_continuar = (Button) this.findViewById(R.id.continuar_btn);
+        //numUnidadesDevueltas = findViewById(R.id.textInputNumPiezas);
 
         // Añadir el listener al boton foto item
         btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +112,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                pieza.setFotoItemResumen(uriSavedImage);
+                piezaSeleccionada.setFotoItemResumen(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -120,7 +125,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
 
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final ArrayList<Pieza> alPieza = new ArrayList<>();
+
         db.collection("material")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -192,7 +197,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
             switch (requestCode) {
                 case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                     bMap = BitmapFactory.decodeFile(
-                            pieza.getFotoItemResumen().getEncodedPath());
+                            piezaSeleccionada.getFotoItemResumen());
 
                     //Añadimos el bitmap al imageView para mostrarlo por pantalla
                     imagen_item.setImageBitmap(bMap);

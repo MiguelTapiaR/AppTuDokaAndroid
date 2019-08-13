@@ -107,7 +107,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoLicencia(uriSavedImage);
+                reporte.setFotoLicencia(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -135,7 +135,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoPlacaDelantera(uriSavedImage);
+                reporte.setFotoPlacaDelantera(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -163,7 +163,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoPlacaTrasera(uriSavedImage);
+                reporte.setFotoPlacaTrasera(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -191,7 +191,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoTractoLateral1(uriSavedImage);
+                reporte.setFotoTractoLateral1(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -219,7 +219,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoTractoLateral2(uriSavedImage);
+                reporte.setFotoTractoLateral2(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -247,7 +247,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoTractoParteTrasera(uriSavedImage);
+                reporte.setFotoTractoParteTrasera(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -275,7 +275,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 File image = new File(imagenesDoka, ts+".jpg");
                 Uri uriSavedImage = Uri.fromFile(image);
 
-                reporte.setFotoDocumentoCliente(uriSavedImage);
+                reporte.setFotoDocumentoCliente(uriSavedImage.toString());
 
                 //Le decimos al intent que queremos grabar la imagen
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
@@ -306,49 +306,49 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 switch (requestCode){
                     case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                                 bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoLicencia().getEncodedPath() );
+                                reporte.getFotoLicencia() );
 
                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                 imagen_licencia.setImageBitmap(bMap);
                                 break;
                     case 2:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                                 bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoPlacaDelantera().getEncodedPath() );
+                                reporte.getFotoPlacaDelantera() );
 
                                  //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                  imagen_placa_delanera.setImageBitmap(bMap);
                                  break;
                     case 3:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                         bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoPlacaTrasera().getEncodedPath() );
+                                reporte.getFotoPlacaTrasera() );
 
                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                 imagen_placa_trasera.setImageBitmap(bMap);
                                 break;
                     case 4:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                         bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoTractoLateral1().getEncodedPath() );
+                                reporte.getFotoTractoLateral1() );
 
                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                 imagen_tracto_lateral1.setImageBitmap(bMap);
                                 break;
                     case 5:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                         bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoTractoLateral2().getEncodedPath() );
+                                reporte.getFotoTractoLateral2() );
 
                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                 imagen_tracto_lateral2.setImageBitmap(bMap);
                                 break;
                     case 6:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                                 bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoTractoParteTrasera().getEncodedPath() );
+                                reporte.getFotoTractoParteTrasera() );
 
                                  //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                 imagen_tracto_parte_trasera.setImageBitmap(bMap);
                                 break;
                     case 7:     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
                         bMap = BitmapFactory.decodeFile(
-                                reporte.getFotoDocumentoCliente().getEncodedPath() );
+                                reporte.getFotoDocumentoCliente() );
 
                                 //Añadimos el bitmap al imageView para mostrarlo por pantalla
                                 imagen_documento_cliente.setImageBitmap(bMap);
