@@ -5,7 +5,7 @@ import android.net.Uri;
 public class Pieza {
     private Uri fotoItemResumen;
     private String id, descripcion, codigo, pais;
-
+    private int unidades;
 
     public Pieza(){
 
@@ -19,6 +19,14 @@ public class Pieza {
         this.codigo = codigo;
         this.pais = pais;
 
+    }
+
+    public int getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(int unidades) {
+        this.unidades = unidades;
     }
 
     public String getId() {

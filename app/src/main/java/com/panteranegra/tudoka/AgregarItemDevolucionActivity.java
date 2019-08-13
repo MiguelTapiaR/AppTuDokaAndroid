@@ -50,6 +50,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         searchableSpinnerUnidadesItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
         String  newString;
 
+
         //recibir el modelo
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
 
