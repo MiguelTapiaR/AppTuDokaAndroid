@@ -196,14 +196,20 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
             Bitmap bMap;
             switch (requestCode) {
                 case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
-                    bMap = BitmapFactory.decodeFile(
-                            piezaSeleccionada.getFotoItemResumen());
+                   bMap = BitmapFactory.decodeFile(
+                           piezaSeleccionada.getFotoItemResumen());
 
                     //Añadimos el bitmap al imageView para mostrarlo por pantalla
                     imagen_item.setImageBitmap(bMap);
+
+
+
+
                     break;
-            }
+           }
         }}
+
+
 
     @Override
     public void onFirebaseLoadSucces(List<Pieza> piezaList) {
