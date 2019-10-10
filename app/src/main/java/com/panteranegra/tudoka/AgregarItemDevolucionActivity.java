@@ -33,6 +33,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
+import pl.aprilapps.easyphotopicker.MediaFile;
+import pl.aprilapps.easyphotopicker.MediaSource;
+
+import static com.panteranegra.tudoka.utils.ImageUtils.compressBitmap;
+
 public class AgregarItemDevolucionActivity extends AppCompatActivity implements IfFirebaseLoadDonePieza {
 
     Button btn_tomar_foto_item;
@@ -42,6 +49,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
     SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
     private Pieza piezaSeleccionada;
     private ArrayList<Pieza> alPieza;
+    private EasyImage easy_image;
     //TextInputEditText numUnidadesDevueltas;
 
     @Override
@@ -78,7 +86,12 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
 
         String  newString;
 
-
+        // Inicializar selector de imágenes o toma de fotos
+        easy_image = new EasyImage.Builder(getBaseContext())
+                .setCopyImagesToPublicGalleryFolder(true)
+                .setFolderName("FotosDoka")
+                .allowMultiple(false)
+                .build();
 
         //recibir el modelo
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
@@ -97,27 +110,8 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // creamos el Intent para llamar a la camara
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-
-                //crear carpeta en la memoria del terminal
-                File imagenesDoka = new File(Environment.getExternalStorageDirectory(), "FotosDoka");
-                imagenesDoka.mkdirs();
-
-                Long tsLong = System.currentTimeMillis()/1000;
-                String ts = tsLong.toString();
-
-                //añadir el nombre de la imagen
-                File image = new File(imagenesDoka, ts+".jpg");
-                Uri uriSavedImage = Uri.fromFile(image);
-
-                piezaSeleccionada.setFotoItemResumen(uriSavedImage.toString());
-
-                //Le decimos al intent que queremos grabar la imagen
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-
-                //Lanzamos la aplicacion de la camara con retorno (forResult)
-                startActivityForResult(cameraIntent, 1);
+                // Abrimos el dialogo para escoger entre tomar una foto o elegir una existente
+                easy_image.openChooser(AgregarItemDevolucionActivity.this);
             }
         });
 
@@ -190,23 +184,34 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        // Comprobar que la foto se realizo
-        if ( resultCode == RESULT_OK) {
-            Bitmap bMap;
-            switch (requestCode) {
-                case 1:   // Creamos un bitmap con la imagen recientemente almacenada en la memmoria
-                   bMap = BitmapFactory.decodeFile(
-                           piezaSeleccionada.getFotoItemResumen());
+        easy_image.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
+            // Regresa el archivo seleccionado  o foto tomada
+            @Override
+            public void onMediaFilesPicked(MediaFile[] imageFiles, MediaSource source) {
+                try {
+                    // Como solamente pedimos un archivo, tomamos el primero del arreglo
+                    MediaFile mediaFile = imageFiles[0];
+                    piezaSeleccionada.setFotoItemResumen(mediaFile.getFile().toURI().toString());
 
-                    //Añadimos el bitmap al imageView para mostrarlo por pantalla
-                    imagen_item.setImageBitmap(bMap);
+                    // Creamos un bitmap con la imagen recientemente almacenada en la memmoria y lo añadimos al imageView para mostrarlo por pantalla
+                    Bitmap bMap = BitmapFactory.decodeFile(mediaFile.getFile().getAbsolutePath());
+                    imagen_item.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onImagePickerError(@NonNull Throwable error, @NonNull MediaSource source) {
+                //Some error handling
+                error.printStackTrace();
+            }
 
-
-
-                    break;
-           }
-        }}
+            @Override
+            public void onCanceled(@NonNull MediaSource source) {
+            }
+        });
+    }
 
 
 

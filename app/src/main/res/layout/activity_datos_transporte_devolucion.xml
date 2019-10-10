@@ -217,6 +217,7 @@
             android:layout_height="128dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21"
             tools:srcCompat="@tools:sample/avatars" />
@@ -257,6 +258,7 @@
             android:layout_height="128dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23"
             tools:srcCompat="@tools:sample/avatars" />
@@ -346,6 +348,7 @@
             android:layout_height="128dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19"
             tools:srcCompat="@tools:sample/avatars" />
@@ -388,6 +391,7 @@
             android:layout_height="128dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24"
             tools:srcCompat="@tools:sample/avatars" />
