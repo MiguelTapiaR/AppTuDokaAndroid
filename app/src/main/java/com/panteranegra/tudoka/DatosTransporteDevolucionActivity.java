@@ -107,6 +107,18 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 .allowMultiple(false)
                 .build();
 
+        imagen_licencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoLicencia()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoLicencia());
+                startActivity(intent);
+            }
+        });
+
         //Añadir el listener al Boton foto licencia
         btn_tomar_foto_licencia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +131,18 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 image_code = 1;
                 // Abrimos el dialogo para escoger entre tomar una foto o elegir una existente
                 easy_image.openChooser(DatosTransporteDevolucionActivity.this);
+            }
+        });
+
+        imagen_placa_delanera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoPlacaDelantera()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoPlacaDelantera());
+                startActivity(intent);
             }
         });
 
@@ -137,6 +161,18 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
             }
         });
 
+        imagen_placa_trasera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoPlacaTrasera()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoPlacaTrasera());
+                startActivity(intent);
+            }
+        });
+
         //Añadir el listener al Boton foto placa trasera
         btn_tomar_foto_placa_trasera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +185,18 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 image_code = 3;
                 // Abrimos el dialogo para escoger entre tomar una foto o elegir una existente
                 easy_image.openChooser(DatosTransporteDevolucionActivity.this);
+            }
+        });
+
+        imagen_tracto_lateral1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoTractoLateral1()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoTractoLateral1());
+                startActivity(intent);
             }
         });
 
@@ -167,6 +215,18 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
             }
         });
 
+        imagen_tracto_lateral2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoTractoLateral2()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoTractoLateral2());
+                startActivity(intent);
+            }
+        });
+
         //Añadir el listener al Boton tracto lateral 2
         btn_tomar_foto_tracto_lateral_2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +239,18 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 image_code = 5;
                 // Abrimos el dialogo para escoger entre tomar una foto o elegir una existente
                 easy_image.openChooser(DatosTransporteDevolucionActivity.this);
+            }
+        });
+
+        imagen_tracto_parte_trasera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoTractoParteTrasera()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoTractoParteTrasera());
+                startActivity(intent);
             }
         });
 
@@ -196,6 +268,19 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                 easy_image.openChooser(DatosTransporteDevolucionActivity.this);
             }
         });
+
+        imagen_documento_cliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(reporte.getFotoDocumentoCliente()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", reporte.getFotoDocumentoCliente());
+                startActivity(intent);
+            }
+        });
+
 
         //Añadir el listener al Boton Documento Cliente
         btn_tomar_foto_documento_cliente.setOnClickListener(new View.OnClickListener() {
@@ -240,37 +325,37 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                     // Verificamos que foto es la que se tomó
                     switch (image_code) {
                         case 1:
-                            reporte.setFotoLicencia(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoLicencia(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_licencia.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
                         case 2:
-                            reporte.setFotoPlacaDelantera(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoPlacaDelantera(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_placa_delanera.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
                         case 3:
-                            reporte.setFotoPlacaTrasera(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoPlacaTrasera(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_placa_trasera.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
                         case 4:
-                            reporte.setFotoTractoLateral1(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoTractoLateral1(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_tracto_lateral1.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
                         case 5:
-                            reporte.setFotoTractoLateral2(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoTractoLateral2(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_tracto_lateral2.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
                         case 6:
-                            reporte.setFotoTractoParteTrasera(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoTractoParteTrasera(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_tracto_parte_trasera.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
                         case 7:
-                            reporte.setFotoDocumentoCliente(mediaFile.getFile().toURI().toString());
+                            reporte.setFotoDocumentoCliente(mediaFile.getFile().getAbsolutePath());
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_documento_cliente.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
@@ -289,7 +374,6 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
 
             @Override
             public void onImagePickerError(@NonNull Throwable error, @NonNull MediaSource source) {
-                //Some error handling
                 error.printStackTrace();
                 // Permitimos que alguien más abra el selector
                 image_code = 0;

@@ -112,6 +112,18 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                 .allowMultiple(false)
                 .build();
 
+        imageViewFotoItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(piezaSeleccionada.getFotoItemResumen()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", piezaSeleccionada.getFotoItemResumen());
+                startActivity(intent);
+            }
+        });
+
         fotoItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +225,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                 try {
                     // Como solamente pedimos un archivo, tomamos el primero del arreglo
                     MediaFile mediaFile = imageFiles[0];
-                    piezaSeleccionada.setFotoItemResumen(mediaFile.getFile().toURI().toString());
+                    piezaSeleccionada.setFotoItemResumen(mediaFile.getFile().getAbsolutePath());
 
                     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria y lo añadimos al imageView para mostrarlo por pantalla
                     Bitmap bMap = BitmapFactory.decodeFile(mediaFile.getFile().getAbsolutePath());

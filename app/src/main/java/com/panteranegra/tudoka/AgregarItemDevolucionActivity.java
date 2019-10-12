@@ -106,6 +106,18 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         btn_continuar = (Button) this.findViewById(R.id.continuar_btn);
         //numUnidadesDevueltas = findViewById(R.id.textInputNumPiezas);
 
+        imagen_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!new File(piezaSeleccionada.getFotoItemResumen()).exists())
+                    return;
+
+                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
+                intent.putExtra("path", piezaSeleccionada.getFotoItemResumen());
+                startActivity(intent);
+            }
+        });
+
         // Añadir el listener al boton foto item
         btn_tomar_foto_item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,7 +203,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                 try {
                     // Como solamente pedimos un archivo, tomamos el primero del arreglo
                     MediaFile mediaFile = imageFiles[0];
-                    piezaSeleccionada.setFotoItemResumen(mediaFile.getFile().toURI().toString());
+                    piezaSeleccionada.setFotoItemResumen(mediaFile.getFile().getAbsolutePath());
 
                     // Creamos un bitmap con la imagen recientemente almacenada en la memmoria y lo añadimos al imageView para mostrarlo por pantalla
                     Bitmap bMap = BitmapFactory.decodeFile(mediaFile.getFile().getAbsolutePath());

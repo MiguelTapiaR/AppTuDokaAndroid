@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VistaItemActivity"></activity>
+        <activity android:name=".DrawImageActivity"></activity>
+        <activity android:name=".VistaItemActivity" />
         <activity android:name=".ResumenItemsActivity" />
         <activity android:name=".AgregarItemDevolucionActivity" />
         <activity android:name=".DatosTransporteDevolucionActivity" />
