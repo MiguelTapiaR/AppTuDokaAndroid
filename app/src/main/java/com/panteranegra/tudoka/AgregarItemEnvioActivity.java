@@ -138,7 +138,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                 if (unidadesET.getText().toString() != ""){
                     piezaSeleccionada.setUnidades(Integer.parseInt(unidadesET.getText().toString()));
                     reporte.getAlPiezas().add(piezaSeleccionada);
-                    Intent intent = new Intent(getApplicationContext(), AgregarItemEnvioActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
                     intent.putExtra("reporte", reporte);
                     startActivity(intent);
                 }else{

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.panteranegra.tudoka.Interface.IfFirebaseLoadDone;
 import com.panteranegra.tudoka.Model.Cliente;
+import com.panteranegra.tudoka.Model.Pieza;
 import com.panteranegra.tudoka.Model.Proyecto;
 import com.panteranegra.tudoka.Model.ReporteEnvio;
 import com.toptoche.searchablespinnerlibrary.SearchableListDialog;
@@ -42,6 +43,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         setContentView(R.layout.activity_datos);
 
         reporteEnvio = new ReporteEnvio();
+        reporteEnvio.setAlPiezas(new ArrayList<Pieza>());
 
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
