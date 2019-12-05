@@ -18,7 +18,15 @@ public class ReporteDevolucion implements Serializable {
     private ArrayList<Pieza> alPiezas;
     private ArrayList<String> alListasCarga;
     private ArrayList<String> alNumerosRemision;
+    private ArrayList<String> alURLListasCarga;
 
+    private String urlFotoLicencia;
+    private String urlFotoPlacaDelantera;
+    private String urlFotoPlacaTrasera;
+    private String urlFotoTractoLateral1;
+    private String urlFotoTractoLateral2;
+    private String urlFotoTractoParteTrasera;
+    private String urlFotoDocumentoCliente;
 
 
     public ReporteDevolucion() {
@@ -121,5 +129,69 @@ public class ReporteDevolucion implements Serializable {
 
     public void setAlNumerosRemision(ArrayList<String> alNumerosRemision) {
         this.alNumerosRemision = alNumerosRemision;
+    }
+
+    public ArrayList<String> getAlURLListasCarga() {
+        return alURLListasCarga;
+    }
+
+    public void setAlURLListasCarga(ArrayList<String> alURLListasCarga) {
+        this.alURLListasCarga = alURLListasCarga;
+    }
+
+    public String getUrlFotoLicencia() {
+        return urlFotoLicencia;
+    }
+
+    public void setUrlFotoLicencia(String urlFotoLicencia) {
+        this.urlFotoLicencia = urlFotoLicencia;
+    }
+
+    public String getUrlFotoPlacaDelantera() {
+        return urlFotoPlacaDelantera;
+    }
+
+    public void setUrlFotoPlacaDelantera(String urlFotoPlacaDelantera) {
+        this.urlFotoPlacaDelantera = urlFotoPlacaDelantera;
+    }
+
+    public String getUrlFotoPlacaTrasera() {
+        return urlFotoPlacaTrasera;
+    }
+
+    public void setUrlFotoPlacaTrasera(String urlFotoPlacaTrasera) {
+        this.urlFotoPlacaTrasera = urlFotoPlacaTrasera;
+    }
+
+    public String getUrlFotoTractoLateral1() {
+        return urlFotoTractoLateral1;
+    }
+
+    public void setUrlFotoTractoLateral1(String urlFotoTractoLateral1) {
+        this.urlFotoTractoLateral1 = urlFotoTractoLateral1;
+    }
+
+    public String getUrlFotoTractoLateral2() {
+        return urlFotoTractoLateral2;
+    }
+
+    public void setUrlFotoTractoLateral2(String urlFotoTractoLateral2) {
+        this.urlFotoTractoLateral2 = urlFotoTractoLateral2;
+    }
+
+    public String getUrlFotoTractoParteTrasera() {
+        return urlFotoTractoParteTrasera;
+    }
+
+    public void setUrlFotoTractoParteTrasera(String urlFotoTractoParteTrasera) {
+        this.urlFotoTractoParteTrasera = urlFotoTractoParteTrasera;
+    }
+
+    public String getUrlFotoDocumentoCliente() {
+        return urlFotoDocumentoCliente;
+    }
+
+    public void setUrlFotoDocumentoCliente(String urlFotoDocumentoCliente) {
+        this.urlFotoDocumentoCliente = urlFotoDocumentoCliente;
     }
 }

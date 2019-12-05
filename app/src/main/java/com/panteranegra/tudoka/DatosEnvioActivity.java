@@ -1,5 +1,6 @@
 package com.panteranegra.tudoka;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,12 +38,19 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
     private ReporteEnvio reporteEnvio;
     private ArrayList<Cliente> alCliente;
     private ArrayList<Proyecto> alProyectos;
+    ProgressDialog progress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_envio);
 
+        progress= new ProgressDialog(this);
+
+        progress.setTitle("Cargando");
+
+        progress.show();
         reporteEnvio = new ReporteEnvio();
         reporteEnvio.setAlPiezas(new ArrayList<Pieza>());
         reporteEnvio.setAlListasCarga(new ArrayList<String>());
@@ -50,6 +59,9 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
 
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
+
+        alCliente.add(new Cliente("","Selecciona...","Selecciona...",""));
+        alProyectos.add(new Proyecto("","","Selecciona...","Selecciona...",""));
 
 
 
@@ -113,9 +125,15 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         guardarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MostrarDatosEnvioActivity.class);
-                intent.putExtra("reporte", reporteEnvio);
-                startActivity(intent);
+
+                if(reporteEnvio.getCliente().getNombre().matches("Selecciona...")||reporteEnvio.getProyecto().getNombre().matches("Selecciona...")){
+                    Toast.makeText(getApplicationContext(),"Selecciona un cliente y un proyecto",Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), MostrarDatosEnvioActivity.class);
+                    intent.putExtra("reporte", reporteEnvio);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -123,7 +141,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        db.collection("clients")
+        db.collection("clients").orderBy("nombreBusqueda")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -141,7 +159,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
                         }
                     }
                 });
-        db.collection("projects")
+        db.collection("projects").orderBy("nombreBusqueda")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -196,6 +214,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         searchableSpinnerNomProyecto.setAdapter(adapterNomProyecto);
         ArrayAdapter<String> adapterNoProyecto = new ArrayAdapter<>( this, android.R.layout.simple_expandable_list_item_1,numerosProyecto);
         searchableSpinnerNoProyecto.setAdapter(adapterNoProyecto);
+        progress.dismiss();
 
     }
 

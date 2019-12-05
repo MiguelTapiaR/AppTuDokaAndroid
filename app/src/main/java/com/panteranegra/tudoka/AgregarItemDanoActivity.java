@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.panteranegra.tudoka.Interface.IfFirebaseLoadDoneDano;
 import com.panteranegra.tudoka.Interface.IfFirebaseLoadDonePieza;
 import com.panteranegra.tudoka.Model.Pieza;
 import com.panteranegra.tudoka.Model.ReporteDano;
@@ -43,17 +44,18 @@ import pl.aprilapps.easyphotopicker.MediaSource;
 
 import static com.panteranegra.tudoka.utils.ImageUtils.compressBitmap;
 
-public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFirebaseLoadDonePieza {
+public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFirebaseLoadDonePieza, IfFirebaseLoadDoneDano {
 
     Button fotoItemBtn, continuarBtn;
     EditText unidadesET;
     ImageView imageViewFotoItem;
     ReporteDano reporte;
-    SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerUnidadesItem;
+    SearchableSpinner searchableSpinnerNomItem, searchableSpinnerCodigoItem, searchableSpinnerTipoDano;
     private ArrayList<Pieza> alPieza;
     private Pieza piezaSeleccionada;
     final int MY_PERMISSIONS_REQUEST = 0;
     private EasyImage easy_image;
+    private ArrayList<String> alDano;
 
 
     @Override
@@ -62,12 +64,14 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
         setContentView(R.layout.activity_agregar_item_dano);
         searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item_envio);
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item_envio);
+        searchableSpinnerTipoDano = (SearchableSpinner)findViewById(R.id.searchable_spinner_tipo_dano);
 
 
         unidadesET = findViewById(R.id.unidades_envio);
 
 
         alPieza = new ArrayList<>();
+        alDano = new ArrayList<>();
 
         //recibir el modelo
         reporte = (ReporteDano) getIntent().getExtras().getSerializable("reporte");
@@ -158,6 +162,18 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
             }
         });
 
+        searchableSpinnerTipoDano.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                piezaSeleccionada.setTipoDano( alDano.get(i));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -175,6 +191,28 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
                                 alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
                             }
                             onFirebaseLoadSuccess(alPieza);
+                        } else {
+                            Log.w("hola2", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+  //Init DB
+
+
+        db.collection("damage")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("hola2", document.getId() + " => " + document.getData());
+
+                                alDano.add(document.getString("tipoDano"));
+                            }
+                            onFirebaseLoadSuccessDano(alDano);
                         } else {
                             Log.w("hola2", "Error getting documents.", task.getException());
                         }
@@ -210,8 +248,10 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
 
     }
 
+    @Override
+    public void onFirebaseLoadSucces(List<Pieza> piezaList) {
 
-
+    }
 
 
     @Override
@@ -244,10 +284,19 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
         });
     }
 
+
+
     @Override
-    public void onFirebaseLoadSucces(List<Pieza> piezaList) {
+    public void onFirebaseLoadSuccessDano(List<String> dano) {
+        List<String> nombresDanos = new ArrayList<>();
+        for (String piezaSeleccionada : dano){
+            nombresDanos.add(piezaSeleccionada);
 
+        }
+
+
+        // Create adapter and set for spinner
+        ArrayAdapter<String> adapterNomPieza = new ArrayAdapter<>( this, android.R.layout.simple_expandable_list_item_1,nombresDanos);
+        searchableSpinnerTipoDano.setAdapter(adapterNomPieza);
     }
-
-
 }

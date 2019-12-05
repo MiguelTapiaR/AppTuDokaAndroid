@@ -3,33 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/amarillo">
-    <LinearLayout
-        android:id="@+id/splash"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/amarillo">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_app"
-            android:layout_gravity="center"
-
-            />
 
 
-    </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/loadingPanel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true" />
-    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -42,13 +17,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:scaleY=".5"
+                android:scaleX=".5"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blanco"
                 android:text="E-mail"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 />
@@ -56,7 +33,7 @@
                 android:id="@+id/email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail adress"
+                android:hint="E-mail "
                 android:background="@color/blanco"
                 android:padding="10dp"
                 android:layout_marginTop="10dp"
@@ -68,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blanco"
-                android:text="Password"
+                android:text="Contraseña"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
@@ -94,9 +71,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorPrimary"
-                android:text="Sign In"/>
+                android:background="@color/azul"
+                android:textColor="@color/blanco"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Iniciar sesión"/>
 
 
         </LinearLayout>

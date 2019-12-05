@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MenuActivity extends AppCompatActivity {
 
     private Button envioBtn;
-    private Button devolucionBtn, danoBTN,obra;
+    private Button devolucionBtn, danoBTN,obra, logout;
     private String cadena;
-
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,8 @@ public class MenuActivity extends AppCompatActivity {
         devolucionBtn = findViewById(R.id.reporte_devolucion);
         danoBTN = findViewById(R.id.reporte_dano);
         obra = findViewById(R.id.reporte_obra);
+        logout = findViewById(R.id.logout);
+        mAuth = FirebaseAuth.getInstance();
 
 
         envioBtn.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +56,15 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReporteObraActivity.class);
+
+                startActivity(intent);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                 startActivity(intent);
             }

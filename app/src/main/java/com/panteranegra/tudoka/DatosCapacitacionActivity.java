@@ -1,5 +1,6 @@
 package com.panteranegra.tudoka;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,7 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
     private ArrayList<Cliente> alCliente;
     private ArrayList<Proyecto> alProyectos;
     EditText etNombreCurso;
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +50,18 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         reporte = new ReporteCapacitacion();
         reporte.setAlActividad(new ArrayList<Actividad>());
 
+        progress= new ProgressDialog(this);
 
+        progress.setTitle("Cargando");
+
+        progress.show();
 
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
+
+        alCliente.add(new Cliente("","Selecciona...","Selecciona...",""));
+        alProyectos.add(new Proyecto("","","Selecciona...","Selecciona...",""));
+
 
         searchableSpinnerNomCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
         searchableSpinnerNoCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
@@ -114,15 +125,13 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         guardarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!etNombreCurso.getText().toString().matches("")){
-                    reporte.setNombreCurso(etNombreCurso.getText().toString());
-                }else{
-                    reporte.setNombreCurso("No hay nombre curso");
+                if(reporte.getCliente().getNombre().matches("Selecciona...")||reporte.getProyecto().getNombre().matches("Selecciona...")){
+                    Toast.makeText(getApplicationContext(),"Selecciona un cliente y un proyecto",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(getApplicationContext(), MostrarDatosCapacitacionActivity.class);
+                    intent.putExtra("reporte", reporte);
+                    startActivity(intent);
                 }
-
-                Intent intent = new Intent(getApplicationContext(), MostrarDatosCapacitacionActivity.class);
-                intent.putExtra("reporte", reporte);
-                startActivity(intent);
             }
         });
 
@@ -130,7 +139,7 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        db.collection("clients")
+        db.collection("clients").orderBy("nombreBusqueda")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -148,7 +157,7 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
                         }
                     }
                 });
-        db.collection("projects")
+        db.collection("projects").orderBy("nombreBusqueda")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -203,6 +212,7 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         searchableSpinnerNomProyecto.setAdapter(adapterNomProyecto);
         ArrayAdapter<String> adapterNoProyecto = new ArrayAdapter<>( this, android.R.layout.simple_expandable_list_item_1,numerosProyecto);
         searchableSpinnerNoProyecto.setAdapter(adapterNoProyecto);
+        progress.dismiss();
 
     }
 

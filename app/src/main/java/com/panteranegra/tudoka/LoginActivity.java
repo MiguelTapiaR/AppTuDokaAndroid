@@ -1,5 +1,6 @@
 package com.panteranegra.tudoka;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,14 +26,18 @@ public class LoginActivity extends AppCompatActivity {
     LinearLayout splash;
     RelativeLayout loading;
     private static final String TAG = "DocSnippets";
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loading = findViewById(R.id.loadingPanel);
-        splash = findViewById(R.id.splash);
+        progress= new ProgressDialog(this);
+
+        progress.setTitle("Cargando");
+
+
         emailET = findViewById(R.id.email_login);
         passwordET = findViewById(R.id.password_login);
         loginBTN = findViewById(R.id.login_btn);
@@ -40,21 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         //reviso si hay user
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
 
-
-            Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-
-            startActivity(intent);
-
-        }else {
-            splash.setVisibility(View.GONE);
-        }
 
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loading.setVisibility(View.VISIBLE);
+                progress.show();
                 if(emailET.getText().toString().isEmpty()&&passwordET.getText().toString().isEmpty()){
                     Toast.makeText(LoginActivity.this, "Enter your email and password",
                             Toast.LENGTH_SHORT).show();
@@ -82,7 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
 //                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            progress.dismiss();
+                            Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrecta.",
                                     Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
                         }

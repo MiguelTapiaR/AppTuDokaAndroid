@@ -2,6 +2,7 @@ package com.panteranegra.tudoka;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -149,13 +150,14 @@ public class ResumenActividadesSeguimientoActivity extends AppCompatActivity {
         final String urlDescarga="";
         // Get the data from an ImageView as bytes
 
+        Auxiliares auxiliares = new Auxiliares();
+        Bitmap bm =auxiliares.getImageResized(getApplicationContext(), Uri.fromFile(new File(actividad.getImagen())));
 
-
-        Uri file = Uri.fromFile(new File(actividad.getImagen()));
+        Uri file = auxiliares.getImageUri(getApplicationContext(),bm);
 
         String[] aNombre= actividad.getImagen().split("/");
         int indexNombre=(aNombre.length)-1;
-        final StorageReference ref = storageRef.child("images/"+aNombre[indexNombre]);
+        final StorageReference ref = storageRef.child("imagesSeguimientopb/"+aNombre[indexNombre]);
         UploadTask uploadTask = ref.putFile(file);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {

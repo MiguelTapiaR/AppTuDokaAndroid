@@ -47,9 +47,10 @@
         <activity android:name=".NumerosDevolucionActivity" />
         <activity android:name=".EnviarMailsActivity" />
         <activity android:name=".utils.DatosTransporteEnvioActivity" />
+        <activity android:name=".LoginActivity" />
 
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,6 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +36,7 @@
         android:id="@+id/et_numero_remision"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Número de remisión..."
+        android:hint="Número de devolución..."
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         />
@@ -46,8 +54,9 @@
     <ListView
         android:id="@+id/lista_numeros_remision"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="20dp"
+
         />
     <Button
         android:id="@+id/btn_finalizar_reporte"
@@ -60,5 +69,6 @@
         android:textColor="@color/blanco"
         android:layout_marginTop="20dp"
         />
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

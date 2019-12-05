@@ -165,7 +165,11 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
 
-        Uri file = Uri.fromFile(new File(url));
+
+        Auxiliares auxiliares = new Auxiliares();
+        Bitmap bm =auxiliares.getImageResized(getApplicationContext(), Uri.fromFile(new File(url)));
+
+        Uri file = auxiliares.getImageUri(getApplicationContext(),bm);
 
         String[] aNombre= url.split("/");
         int indexNombre=(aNombre.length)-1;
@@ -285,7 +289,11 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
 
-        Uri file = Uri.fromFile(new File(actividad));
+        Auxiliares auxiliares = new Auxiliares();
+        Bitmap bm =auxiliares.getImageResized(getApplicationContext(), Uri.fromFile(new File(actividad)));
+
+        Uri file = auxiliares.getImageUri(getApplicationContext(),bm);
+
 
         String[] aNombre= actividad.split("/");
         int indexNombre=(aNombre.length)-1;
@@ -377,8 +385,11 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         // Get the data from an ImageView as bytes
 
 
+        Auxiliares auxiliares = new Auxiliares();
+        Bitmap bm =auxiliares.getImageResized(getApplicationContext(), Uri.fromFile(new File(actividad.getFotoItemResumen())));
 
-        Uri file = Uri.fromFile(new File(actividad.getFotoItemResumen()));
+        Uri file = auxiliares.getImageUri(getApplicationContext(),bm);
+
 
         String[] aNombre= actividad.getFotoItemResumen().split("/");
         int indexNombre=(aNombre.length)-1;
@@ -543,7 +554,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),respuesta, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), EnviarMailsActivity.class);
                             //para pasar el modelo
-                            intent.putExtra("urlReporte", "reportecapacitacion/"+idReporteGenerado+".pdf");
+                            intent.putExtra("urlReporte", "pdfs/"+idReporteGenerado+".pdf");
                             startActivity(intent);
 
 
