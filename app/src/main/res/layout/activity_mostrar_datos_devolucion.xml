@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reporte de Devolución"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/azul"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalle del reporte"
+        android:textColor="@color/azul"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cliente:"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_nombre_cliente_devolucion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Cliente:"
+            android:textColor="@color/azul"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No. cliente:"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_numero_cliente_devolucion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="No. cliente:"
+            android:textColor="@color/azul"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Proyecto:"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_nombre_proyecto_devolucion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Cliente:"
+            android:textColor="@color/azul"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No. proyecto:"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_numero_proyecto_devolucion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Cliente:"
+            android:textColor="@color/azul"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_continuar_mostrar_datos_devolucion"
+        android:text="Continuar "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:background="@color/azul"
+        android:textColor="@color/blanco"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>

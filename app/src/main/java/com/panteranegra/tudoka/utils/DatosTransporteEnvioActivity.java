@@ -17,9 +17,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.panteranegra.tudoka.AgregarItemDevolucionActivity;
-import com.panteranegra.tudoka.DatosTransporteEnvioActivity;
 import com.panteranegra.tudoka.DrawImageActivity;
 import com.panteranegra.tudoka.Model.ReporteDevolucion;
+import com.panteranegra.tudoka.Model.ReporteEnvio;
+import com.panteranegra.tudoka.NumerosRemisionActivity;
 import com.panteranegra.tudoka.R;
 
 import java.io.File;
@@ -48,15 +49,18 @@ public class DatosTransporteEnvioActivity extends AppCompatActivity {
     ImageView imagen_tracto_parte_trasera;
     ImageView imagen_documento_cliente;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
-    ReporteDevolucion reporte;
+
     private Button btn_continuar;
     private EasyImage easy_image;
     int image_code = 0;
 
+    ReporteEnvio reporte;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reporte = new ReporteDevolucion();
+
+        reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
+
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         setContentView(R.layout.activity_datos_transporte_envio);
@@ -301,7 +305,7 @@ public class DatosTransporteEnvioActivity extends AppCompatActivity {
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AgregarItemDevolucionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), NumerosRemisionActivity.class);
                 //para pasar el modelo
                 intent.putExtra("reporte", reporte);
                 startActivity(intent);

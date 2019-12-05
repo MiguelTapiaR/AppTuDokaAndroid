@@ -15,7 +15,9 @@ public class ReporteDevolucion implements Serializable {
     private String fotoTractoLateral2;
     private String fotoTractoParteTrasera;
     private String fotoDocumentoCliente;
-    private  ArrayList<Pieza> alPiezaDevolucion;
+    private ArrayList<Pieza> alPiezas;
+    private ArrayList<String> alListasCarga;
+    private ArrayList<String> alNumerosRemision;
 
 
 
@@ -95,5 +97,29 @@ public class ReporteDevolucion implements Serializable {
 
     public void setFotoDocumentoCliente(String fotoDocumentoCliente) {
         this.fotoDocumentoCliente = fotoDocumentoCliente;
+    }
+
+    public ArrayList<Pieza> getAlPiezas() {
+        return alPiezas;
+    }
+
+    public void setAlPiezas(ArrayList<Pieza> alPiezas) {
+        this.alPiezas = alPiezas;
+    }
+
+    public ArrayList<String> getAlListasCarga() {
+        return alListasCarga;
+    }
+
+    public void setAlListasCarga(ArrayList<String> alListasCarga) {
+        this.alListasCarga = alListasCarga;
+    }
+
+    public ArrayList<String> getAlNumerosRemision() {
+        return alNumerosRemision;
+    }
+
+    public void setAlNumerosRemision(ArrayList<String> alNumerosRemision) {
+        this.alNumerosRemision = alNumerosRemision;
     }
 }

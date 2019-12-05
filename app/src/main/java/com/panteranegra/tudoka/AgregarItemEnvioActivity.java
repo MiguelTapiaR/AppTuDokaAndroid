@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -21,7 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,12 +28,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.panteranegra.tudoka.Interface.IfFirebaseLoadDonePieza;
 import com.panteranegra.tudoka.Model.Pieza;
-import com.panteranegra.tudoka.Model.ReporteDevolucion;
 import com.panteranegra.tudoka.Model.ReporteEnvio;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,14 +131,15 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
         continuarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (unidadesET.getText().toString() != ""){
+                if (!unidadesET.getText().toString().matches("")&&piezaSeleccionada.getFotoItemResumen()!=null){
                     piezaSeleccionada.setUnidades(Integer.parseInt(unidadesET.getText().toString()));
                     reporte.getAlPiezas().add(piezaSeleccionada);
-                    Intent intent = new Intent(getApplicationContext(), ResumenItemsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ResumenItemsEnvioActivity.class);
                     intent.putExtra("reporte", reporte);
                     startActivity(intent);
                 }else{
-                    //todo mandar error
+
+                    Toast.makeText(getApplicationContext(),"Por favor toma una fotografía o ingresa el número de piezas", Toast.LENGTH_SHORT ).show();
                 }
 
             }

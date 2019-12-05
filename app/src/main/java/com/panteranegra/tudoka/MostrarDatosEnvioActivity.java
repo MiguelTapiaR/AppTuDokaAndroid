@@ -21,11 +21,11 @@ public class MostrarDatosEnvioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_datos_envio);
 
         //elementos de layout
-        tomarFotosBtn = findViewById(R.id.empezarTomarFotos);
-        nombreCliente = findViewById(R.id.nombre_cliente);
-        numeroCliente = findViewById(R.id.numero_cliente);
-        nombreProyecto = findViewById(R.id.nombre_proyecto);
-        numeroProyecto = findViewById(R.id.numero_proyecto);
+        tomarFotosBtn = findViewById(R.id.btn_continuar_mostrar_datos);
+        nombreCliente = findViewById(R.id.tv_nombre_cliente);
+        numeroCliente = findViewById(R.id.tv_numero_cliente);
+        nombreProyecto = findViewById(R.id.tv_nombre_proyecto);
+        numeroProyecto = findViewById(R.id.tv_numero_proyecto);
 
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
 

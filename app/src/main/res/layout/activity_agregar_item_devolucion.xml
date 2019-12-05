@@ -15,134 +15,134 @@
     android:layout_height="match_parent"
     tools:context=".AgregarItemDevolucionActivity">
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="267dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:text="Código de la Pieza"
-        android:textColor="#004a8e"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_nombre_item" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="267dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:text="Número de piezas"
-        android:textColor="#004a8e"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_codigo_item" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:autoText="true"
+            android:text="Agregar Item"
+            android:textAlignment="center"
+            android:textColor="#004a8e"
+            android:textColorLink="#004a8e"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="267dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:autoText="true"
-        android:text="Agregar Item"
-        android:textAlignment="center"
-        android:textColor="#004a8e"
-        android:textColorLink="#004a8e"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imagen_foto_envio"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <ImageView
-        android:id="@+id/imageViewFotoItem"
-        android:layout_width="267dp"
-        android:layout_height="167dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:srcCompat="@tools:sample/avatars" />
+        <Button
+            android:id="@+id/foto_item_envio_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#004a8e"
+            android:text="Tomar Fotografía"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#ffffff" />
 
 
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/searchable_spinner_nombre_item"
-        android:layout_width="267dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28"
-        tools:ignore="MissingConstraints"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/searchable_spinner_codigo_item"
-        android:layout_width="267dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30"
-        tools:ignore="MissingConstraints"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:text="Nombre de la Pieza"
+            android:textColor="#004a8e" />
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/searchable_spinner_nombre_item_envio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:spinnerMode="dropdown"
+            tools:ignore="MissingConstraints"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
 
 
-    <Button
-        android:id="@+id/continuar_btn"
-        android:layout_width="267dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#004a8e"
-        android:text="Continuar"
-        android:textColor="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="622dp" />
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:text="Código de la Pieza"
+            android:textColor="#004a8e"/>
 
-    <Button
-        android:id="@+id/fotoItemBtn"
-        android:layout_width="267dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#004a8e"
-        android:text="Tomar Fotografía"
-        android:textColor="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoItem" />
 
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="40dp"
-        android:layout_height="37dp"
-        app:layout_constraintTop_toBottomOf="@+id/continuar_btn"
-        tools:layout_editor_absoluteX="1dp" />
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/searchable_spinner_codigo_item_envio"
+            android:layout_width="267dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30"
+            tools:ignore="MissingConstraints"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="267dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:text="Nombre de la Pieza"
-        android:textColor="#004a8e"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fotoItemBtn" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="267dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:text="Número de piezas"
+            android:textColor="#004a8e"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_codigo_item" />
+
+        <EditText
+            android:id="@+id/unidades_envio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:inputType="number"/>
+
+
+
+        <Button
+            android:id="@+id/continuar_envio_btn"
+            android:text="Continuar "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:background="@color/azul"
+            android:textColor="@color/blanco"
+            android:layout_marginTop="20dp"/>
+
+
+
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

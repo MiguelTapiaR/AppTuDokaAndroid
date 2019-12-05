@@ -15,26 +15,48 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DrawImageActivity"></activity>
         <activity android:name=".VistaItemActivity" />
-        <activity android:name=".ResumenItemsActivity" />
+        <activity android:name=".ResumenItemsEnvioActivity" />
         <activity android:name=".AgregarItemDevolucionActivity" />
         <activity android:name=".DatosTransporteDevolucionActivity" />
         <activity android:name=".MostrarActivity" />
-        <activity android:name=".DatosActivity" />
+        <activity android:name=".DatosDevolucionActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".DatosEnvioActivity" />
         <activity android:name=".MostrarDatosEnvioActivity" />
         <activity android:name=".AgregarItemEnvioActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ListasCargasEnvioActivity" />
+        <activity android:name=".NumerosRemisionActivity" />
+        <activity android:name=".MostrarDatosDevolucionActivity" />
+        <activity android:name=".DocumentosClienteActivity" />
+        <activity android:name=".ReporteObraActivity" />
+        <activity android:name=".DatosCapacitacionActivity" />
+        <activity android:name=".AgregarActividadCapacitacionActivity" />
+        <activity android:name=".ResumenActividadesCapacitacionActivity" />
+        <activity android:name=".DatosSeguimientoActivity" />
+        <activity android:name=".MostrarDatosSeguimientoActivity" />
+        <activity android:name=".AgregarActividadSeguimientoActivity" />
+        <activity android:name=".ResumenActividadesSeguimientoActivity" />
+        <activity android:name=".DatosDano" />
+
+        <activity android:name=".MostrarDatosDanoActivity" />
+
+        <activity android:name=".AgregarItemDanoActivity" />
+        <activity android:name=".ResumenItemsDanoActivity" />
+        <activity android:name=".MostrarDatosCapacitacionActivity" />
+        <activity android:name=".ResumenItemsDevolucionActivity" />
+        <activity android:name=".NumerosDevolucionActivity" />
+        <activity android:name=".EnviarMailsActivity" />
+        <activity android:name=".utils.DatosTransporteEnvioActivity" />
+
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.login.Prueba" />
+
     </application>
 
 </manifest>

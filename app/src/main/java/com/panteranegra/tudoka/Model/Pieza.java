@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Pieza implements Serializable {
     private String fotoItemResumen;
-    private String id, descripcion, codigo, pais;
+    private String id, descripcion, codigo, pais, tipoDano, url;
     private int unidades;
 
 
@@ -70,5 +70,21 @@ public class Pieza implements Serializable {
 
     public void setFotoItemResumen(String fotoItemResumen) {
         this.fotoItemResumen = fotoItemResumen;
+    }
+
+    public String getTipoDano() {
+        return tipoDano;
+    }
+
+    public void setTipoDano(String tipoDano) {
+        this.tipoDano = tipoDano;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

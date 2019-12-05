@@ -8,7 +8,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".DatosActivity">
+    tools:context=".DatosDevolucionActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:minHeight="700dp"
-        tools:context=".DatosActivity">
+        tools:context=".DatosDevolucionActivity">
 
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -160,7 +160,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:autoText="true"
-            android:text="Reporte de Devolución"
+            android:text="Reporte de Envío"
             android:textAlignment="center"
             android:textColor="#004a8e"
             android:textColorLink="#004a8e"

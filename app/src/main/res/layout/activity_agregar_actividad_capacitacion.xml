@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar actividad de capacitación"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/azul"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        />
+    <ImageView
+        android:id="@+id/imagen_foto_envio"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
+    <Button
+        android:id="@+id/btn_nueva_foto_capacitacion"
+        android:text="Nueva foto "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:background="@color/azul"
+        android:textColor="@color/blanco"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción de la actividad"
+        android:textColor="@color/azul"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <EditText
+        android:id="@+id/descripcion_capacitacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
+    <Button
+        android:id="@+id/btn_continuar_actividad_capacitacion"
+        android:text="Continuar "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:background="@color/azul"
+        android:textColor="@color/blanco"
+        android:layout_marginTop="20dp"
+        />
+</LinearLayout>

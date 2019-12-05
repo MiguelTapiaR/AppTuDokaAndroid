@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="amarillo">#ffe600</color>
+    <color name="blanco">#ffffff</color>
     <color name="azul">#004a8e</color>
+    <color name="rojo">#B00020</color>
 
 </resources>

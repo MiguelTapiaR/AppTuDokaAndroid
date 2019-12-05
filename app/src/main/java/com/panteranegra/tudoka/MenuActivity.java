@@ -9,7 +9,7 @@ import android.widget.Button;
 public class MenuActivity extends AppCompatActivity {
 
     private Button envioBtn;
-    private Button devolucionBtn;
+    private Button devolucionBtn, danoBTN,obra;
     private String cadena;
 
     @Override
@@ -20,6 +20,8 @@ public class MenuActivity extends AppCompatActivity {
         // Botones
         envioBtn = findViewById(R.id.reporte_envio);
         devolucionBtn = findViewById(R.id.reporte_devolucion);
+        danoBTN = findViewById(R.id.reporte_dano);
+        obra = findViewById(R.id.reporte_obra);
 
 
         envioBtn.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +35,23 @@ public class MenuActivity extends AppCompatActivity {
         devolucionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DatosActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DatosDevolucionActivity.class);
+
+                startActivity(intent);
+            }
+        });
+        danoBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DatosDano.class);
+
+                startActivity(intent);
+            }
+        });
+        obra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReporteObraActivity.class);
 
                 startActivity(intent);
             }

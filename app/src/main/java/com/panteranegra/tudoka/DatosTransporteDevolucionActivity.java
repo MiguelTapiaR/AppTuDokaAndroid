@@ -33,6 +33,7 @@ import static com.panteranegra.tudoka.utils.ImageUtils.compressBitmap;
 
 public class DatosTransporteDevolucionActivity extends AppCompatActivity {
 
+
     Button btn_tomar_foto_licencia;
     Button btn_tomar_foto_placa_delantera;
     Button btn_tomar_foto_placa_trasera;
@@ -56,7 +57,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reporte = new ReporteDevolucion();
+        reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         setContentView(R.layout.activity_datos_transporte_devolucion);

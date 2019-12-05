@@ -40,13 +40,17 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datos);
+        setContentView(R.layout.activity_datos_envio);
 
         reporteEnvio = new ReporteEnvio();
         reporteEnvio.setAlPiezas(new ArrayList<Pieza>());
+        reporteEnvio.setAlListasCarga(new ArrayList<String>());
+        reporteEnvio.setAlNumerosRemision(new ArrayList<String>());
+        reporteEnvio.setAlURLListasCarga(new ArrayList<String>());
 
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
+
 
 
         searchableSpinnerNomCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
