@@ -65,11 +65,18 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item_envio);
 
 
+        searchableSpinnerNomItem.setPositiveButton("Cerrar");
+        searchableSpinnerNomItem.setTitle("Seleccionar Item");
+
+
+        searchableSpinnerCodigoItem.setPositiveButton("Cerrar");
+        searchableSpinnerCodigoItem.setTitle("Seleccionar Item");
+
         unidadesET = findViewById(R.id.unidades_envio);
 
 
         alPieza = new ArrayList<>();
-
+        alPieza.add(new Pieza("-1", "Selecciona...", "Selecciona",  "MX"));
         //recibir el modelo
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
 
@@ -149,8 +156,11 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         searchableSpinnerNomItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(piezaSeleccionada!=null){
+                    alPieza.get(i).setFotoItemResumen(piezaSeleccionada.getFotoItemResumen());
+                }
                 piezaSeleccionada = alPieza.get(i);
-
+                searchableSpinnerCodigoItem.setSelection(i);
             }
 
             @Override
@@ -163,7 +173,7 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("material")
+        db.collection("material").orderBy("descripcion")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

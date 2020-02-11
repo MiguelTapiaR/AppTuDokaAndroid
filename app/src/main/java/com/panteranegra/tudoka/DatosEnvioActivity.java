@@ -66,10 +66,21 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
 
 
         searchableSpinnerNomCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
+
         searchableSpinnerNoCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item);
+
         searchableSpinnerNomProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner4);
+
         searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
 
+        searchableSpinnerNomCliente.setTitle("Seleccionar Item");
+        searchableSpinnerNoCliente.setTitle("Seleccionar Item");
+        searchableSpinnerNomProyecto.setTitle("Seleccionar Item");
+        searchableSpinnerNoProyecto.setTitle("Seleccionar Item");
+        searchableSpinnerNoProyecto.setPositiveButton("Cerrar");
+        searchableSpinnerNomProyecto.setPositiveButton("Cerrar");
+        searchableSpinnerNomCliente.setPositiveButton("Cerrar");
+        searchableSpinnerNoCliente.setPositiveButton("Cerrar");
         searchableSpinnerNomCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -195,6 +206,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
 
         // Create adapter and set for spinner
         ArrayAdapter<String> adapterNomCliente = new ArrayAdapter<>( this, android.R.layout.simple_expandable_list_item_1,nombresClientes);
+
         searchableSpinnerNomCliente.setAdapter(adapterNomCliente);
         ArrayAdapter<String> adapterNoCliente = new ArrayAdapter<>( this, android.R.layout.simple_expandable_list_item_1,numerosClientes);
         searchableSpinnerNoCliente.setAdapter(adapterNoCliente);

@@ -62,11 +62,20 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
         searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item_envio);
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item_envio);
 
+        searchableSpinnerNomItem.setPositiveButton("Cerrar");
+        searchableSpinnerNomItem.setTitle("Seleccionar Item");
+
+
+        searchableSpinnerCodigoItem.setPositiveButton("Cerrar");
+        searchableSpinnerCodigoItem.setTitle("Seleccionar Item");
+
+
 
         unidadesET = findViewById(R.id.unidades_envio);
 
 
         alPieza = new ArrayList<>();
+        alPieza.add(new Pieza("-1", "Selecciona...", "Selecciona",  "MX"));
 
         //recibir el modelo
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
@@ -148,7 +157,12 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
         searchableSpinnerNomItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(piezaSeleccionada!=null){
+                    alPieza.get(i).setFotoItemResumen(piezaSeleccionada.getFotoItemResumen());
+                }
+
                 piezaSeleccionada = alPieza.get(i);
+                searchableSpinnerCodigoItem.setSelection(i);
 
             }
 
@@ -162,7 +176,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("material")
+        db.collection("material").orderBy("descripcion")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -249,5 +263,10 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+    }
 
 }

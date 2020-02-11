@@ -37,6 +37,16 @@ public class ResumenItemsEnvioActivity extends AppCompatActivity {
 
         adapter = new ItemsAdapter(getApplicationContext(),reporte.getAlPiezas());
         contenido.setAdapter(adapter);
+        Button nuevoItem = findViewById(R.id.button7);
+        nuevoItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AgregarItemEnvioActivity.class);
+                //para pasar el modelo
+                intent.putExtra("reporte", reporte);
+                startActivity(intent);
+            }
+        });
 
         continuarBtn = findViewById(R.id.button8);
         continuarBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +58,6 @@ public class ResumenItemsEnvioActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

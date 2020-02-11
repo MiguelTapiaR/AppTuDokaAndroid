@@ -67,11 +67,24 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
         searchableSpinnerTipoDano = (SearchableSpinner)findViewById(R.id.searchable_spinner_tipo_dano);
 
 
+        searchableSpinnerNomItem.setPositiveButton("Cerrar");
+        searchableSpinnerNomItem.setTitle("Seleccionar Item");
+
+
+        searchableSpinnerCodigoItem.setPositiveButton("Cerrar");
+        searchableSpinnerCodigoItem.setTitle("Seleccionar Item");
+
+        searchableSpinnerTipoDano.setPositiveButton("Cerrar");
+        searchableSpinnerTipoDano.setTitle("Seleccionar Item");
+
+
         unidadesET = findViewById(R.id.unidades_envio);
 
 
         alPieza = new ArrayList<>();
+        alPieza.add(new Pieza("-1", "Selecciona...", "Selecciona...",  "MX"));
         alDano = new ArrayList<>();
+        alDano.add("Selecciona...");
 
         //recibir el modelo
         reporte = (ReporteDano) getIntent().getExtras().getSerializable("reporte");
@@ -152,7 +165,11 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
         searchableSpinnerNomItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(piezaSeleccionada!=null){
+                    alPieza.get(i).setFotoItemResumen(piezaSeleccionada.getFotoItemResumen());
+                }
                 piezaSeleccionada = alPieza.get(i);
+                searchableSpinnerCodigoItem.setSelection(i);
 
             }
 
@@ -178,7 +195,7 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("material")
+        db.collection("material").orderBy("descripcion")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -200,7 +217,7 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
   //Init DB
 
 
-        db.collection("damage")
+        db.collection("damage").orderBy("tipoDano")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

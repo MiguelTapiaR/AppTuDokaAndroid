@@ -40,14 +40,12 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
     Button btn_tomar_foto_tracto_lateral_1;
     Button btn_tomar_foto_tracto_lateral_2;
     Button btn_tomar_foto_tracto_parte_trasera;
-    Button btn_tomar_foto_documento_cliente;
     ImageView imagen_licencia;
     ImageView imagen_placa_delanera;
     ImageView imagen_placa_trasera;
     ImageView imagen_tracto_lateral1;
     ImageView imagen_tracto_lateral2;
     ImageView imagen_tracto_parte_trasera;
-    ImageView imagen_documento_cliente;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     ReporteDevolucion reporte;
     private Button btn_continuar;
@@ -88,18 +86,17 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
         imagen_licencia = (ImageView) this.findViewById(R.id.imageLicencia);
         imagen_placa_delanera = (ImageView) this.findViewById(R.id.imagePlacaDelantera);
         imagen_placa_trasera = (ImageView) this.findViewById(R.id.imagePlacaTrasera);
-        imagen_tracto_lateral1 = (ImageView) this.findViewById(R.id.imageTractoLateral1);
+        imagen_tracto_lateral1 = (ImageView) this.findViewById(R.id.imageTractoLateral);
         imagen_tracto_lateral2 = (ImageView) this.findViewById(R.id.imageTractoLateral2);
         imagen_tracto_parte_trasera = (ImageView) this.findViewById(R.id.imageTractoParteTrasera);
-        imagen_documento_cliente = (ImageView) this.findViewById(R.id.imageDocumentoCliente);
-        btn_tomar_foto_licencia = (Button) this.findViewById(R.id.fotoLicenciaBtn);
-        btn_tomar_foto_placa_delantera = (Button) this.findViewById(R.id.fotoPlacaDelanteraBtn);
-        btn_tomar_foto_placa_trasera = (Button) this.findViewById(R.id.fotoPlacaTraseraBtn);
-        btn_tomar_foto_tracto_lateral_1 = (Button) this.findViewById(R.id.fotoTractoLateral1Btn);
-        btn_tomar_foto_tracto_lateral_2 = (Button) this.findViewById(R.id.fotoTractoLateral2Btn);
-        btn_tomar_foto_tracto_parte_trasera = (Button) this.findViewById(R.id.fotoTractoTraseraBtn);
-        btn_tomar_foto_documento_cliente = (Button) this.findViewById(R.id.fotoDocumentoClienteBtn);
-        btn_continuar = findViewById(R.id.datosTransporteContinuarBtn);
+        btn_tomar_foto_licencia = (Button) this.findViewById(R.id.foto_licencia);
+        btn_tomar_foto_placa_delantera = (Button) this.findViewById(R.id.foto_placa_delantera);
+        btn_tomar_foto_placa_trasera = (Button) this.findViewById(R.id.foto_placa_trasera);
+        btn_tomar_foto_tracto_lateral_1 = (Button) this.findViewById(R.id.foto_tracto_lateral1);
+        btn_tomar_foto_tracto_lateral_2 = (Button) this.findViewById(R.id.foto_tracto_lateral2);
+        btn_tomar_foto_tracto_parte_trasera = (Button) this.findViewById(R.id.foto_tracto_trasera);
+
+        btn_continuar = findViewById(R.id.btn_continuar_datos_transporte);
 
         // Inicializar selector de imágenes o toma de fotos
         easy_image = new EasyImage.Builder(getBaseContext())
@@ -270,33 +267,9 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
             }
         });
 
-        imagen_documento_cliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!new File(reporte.getFotoDocumentoCliente()).exists())
-                    return;
-
-                Intent intent = new Intent(getApplicationContext(), DrawImageActivity.class);
-                intent.putExtra("path", reporte.getFotoDocumentoCliente());
-                startActivity(intent);
-            }
-        });
 
 
-        //Añadir el listener al Boton Documento Cliente
-        btn_tomar_foto_documento_cliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Para evitar que se pueda intentar abrir varias veces el selector, revisamos si no hay algún otro abierto
-                if (image_code != 0)
-                    return;
 
-                // Guardamos la imagen a obtener
-                image_code = 7;
-                // Abrimos el dialogo para escoger entre tomar una foto o elegir una existente
-                easy_image.openChooser(DatosTransporteDevolucionActivity.this);
-            }
-        });
 
         // Añadir listener al boton Continuar
         btn_continuar.setOnClickListener(new View.OnClickListener() {
@@ -355,11 +328,7 @@ public class DatosTransporteDevolucionActivity extends AppCompatActivity {
                             // Añadimos el bitmap al imageView para mostrarlo por pantalla
                             imagen_tracto_parte_trasera.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
                             break;
-                        case 7:
-                            reporte.setFotoDocumentoCliente(mediaFile.getFile().getAbsolutePath());
-                            // Añadimos el bitmap al imageView para mostrarlo por pantalla
-                            imagen_documento_cliente.setImageBitmap(compressBitmap(bMap, 480, (480*bMap.getHeight()/bMap.getWidth())));
-                            break;
+
                         default:
                             break;
                     }

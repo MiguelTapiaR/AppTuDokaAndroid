@@ -571,6 +571,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 /*progressDialog.dismiss();
                 toastPersonalizado.crearToast("Error de conexión, revisa tu conexión a internet e intenta nuevamente", null);*/
+                Log.w(TAG, "Error adding document", error);
             }
         }) {
 
@@ -584,7 +585,8 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
         };
-
+    jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(60000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
 
     }

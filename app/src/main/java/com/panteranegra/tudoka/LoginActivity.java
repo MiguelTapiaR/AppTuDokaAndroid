@@ -1,7 +1,14 @@
 package com.panteranegra.tudoka;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +19,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,13 +36,14 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout loading;
     private static final String TAG = "DocSnippets";
     ProgressDialog progress;
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        progress= new ProgressDialog(this);
+        progress = new ProgressDialog(this);
 
         progress.setTitle("Cargando");
 
@@ -47,21 +57,22 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
 
+
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progress.show();
-                if(emailET.getText().toString().isEmpty()&&passwordET.getText().toString().isEmpty()){
+                if (emailET.getText().toString().isEmpty() && passwordET.getText().toString().isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Enter your email and password",
                             Toast.LENGTH_SHORT).show();
-                }else {
-                    loginFB(emailET.getText().toString(),passwordET.getText().toString());
+                } else {
+                    loginFB(emailET.getText().toString(), passwordET.getText().toString());
                 }
             }
         });
     }
 
-    public void loginFB(final String email, final String password){
+    public void loginFB(final String email, final String password) {
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -90,4 +101,6 @@ public class LoginActivity extends AppCompatActivity {
         // [END sign_in_with_email]
 
     }
+
+
 }

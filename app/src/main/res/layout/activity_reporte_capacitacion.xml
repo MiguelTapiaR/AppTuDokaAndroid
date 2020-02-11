@@ -5,192 +5,204 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reporte de Capacitación"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/azul"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Por favor ingresa los siguientes datos:"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/azul"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del curso:"
-        android:layout_gravity="center"
-        android:textColor="@color/azul"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/nombre_curso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reporte de Capacitación"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/azul"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Por favor ingresa los siguientes datos:"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/azul"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del curso:"
+                android:layout_gravity="center"
+                android:textColor="@color/azul"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                />
 
+            <EditText
+                android:id="@+id/nombre_curso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:minHeight="700dp"
-        tools:context=".DatosDevolucionActivity">
-
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner4"
-            android:layout_width="325dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            tools:ignore="MissingConstraints">
-
-
-        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="325dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:text=" Nombre de Proyecto"
-            android:textColor="#004a8e"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_codigo_item" />
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner_numero_item"
-            android:layout_width="325dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9"
-            tools:ignore="MissingConstraints">
-
-
-        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="325dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:text=" Número del Cliente"
-            android:textColor="#004a8e"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_nombre_item" />
-
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="325dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:text=" Número de Proyecto"
-            android:textColor="#004a8e"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner4" />
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner_nombre_item"
-            android:layout_width="325dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8"
-            tools:ignore="MissingConstraints">
-        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/searchable_spinner_codigo_item"
-            android:layout_width="325dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            tools:ignore="MissingConstraints">
-
-
-        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
-
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="325dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:text=" Nombre del Cliente"
-            android:textColor="#004a8e"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
 
 
 
-
-        <Button
-            android:id="@+id/guardar_datos"
-            android:layout_width="325dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="20dp"
-            android:background="#004a8e"
-            android:text="Guardar"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.603"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_numero_item" />
+            <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:minHeight="700dp"
+                tools:context=".DatosDevolucionActivity">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/searchable_spinner4"
+                    android:layout_width="325dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.457"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10"
+                    tools:ignore="MissingConstraints">
+
+
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="325dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:text=" Nombre de Proyecto"
+                    android:textColor="#004a8e"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.457"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_codigo_item" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/searchable_spinner_numero_item"
+                    android:layout_width="325dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
+                    tools:ignore="MissingConstraints">
+
+
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="325dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:text=" Número del Cliente"
+                    android:textColor="#004a8e"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.457"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_nombre_item" />
+
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="325dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:text=" Número de Proyecto"
+                    android:textColor="#004a8e"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchable_spinner4" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/searchable_spinner_nombre_item"
+                    android:layout_width="325dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.457"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8"
+                    tools:ignore="MissingConstraints">
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/searchable_spinner_codigo_item"
+                    android:layout_width="325dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.457"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12"
+                    tools:ignore="MissingConstraints">
+
+
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="325dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="8dp"
+                    android:text=" Nombre del Cliente"
+                    android:textColor="#004a8e"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.457"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+
+
+                <Button
+                    android:id="@+id/guardar_datos"
+                    android:layout_width="325dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="104dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="#004a8e"
+                    android:text="Guardar"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.603"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchable_spinner_numero_item" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

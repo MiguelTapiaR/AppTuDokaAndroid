@@ -68,6 +68,15 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         searchableSpinnerNomProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner4);
         searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
 
+        searchableSpinnerNomCliente.setTitle("Seleccionar Item");
+        searchableSpinnerNoCliente.setTitle("Seleccionar Item");
+        searchableSpinnerNomProyecto.setTitle("Seleccionar Item");
+        searchableSpinnerNoProyecto.setTitle("Seleccionar Item");
+        searchableSpinnerNoProyecto.setPositiveButton("Cerrar");
+        searchableSpinnerNomProyecto.setPositiveButton("Cerrar");
+        searchableSpinnerNomCliente.setPositiveButton("Cerrar");
+        searchableSpinnerNoCliente.setPositiveButton("Cerrar");
+
         etNombreCurso = findViewById(R.id.nombre_curso);
 
         searchableSpinnerNomCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

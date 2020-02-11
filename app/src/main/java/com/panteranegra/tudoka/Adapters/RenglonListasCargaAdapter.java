@@ -33,6 +33,7 @@ public class RenglonListasCargaAdapter extends ArrayAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View item = inflater.inflate(R.layout.renglon_listas_carga,null);
 
+
         ImageView imagen = (ImageView) item.findViewById(R.id.imagen_lista_carga);
         Bitmap bMap = BitmapFactory.decodeFile(datos.get(position));
         //imagen.setImageResource(datos.get(position).getDrawableImageID());
@@ -44,6 +45,7 @@ public class RenglonListasCargaAdapter extends ArrayAdapter {
             @Override
             public void onClick(View view) {
                 datos.remove(position);
+                notifyDataSetChanged();
             }
         });
 

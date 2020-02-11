@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,9 +32,19 @@ public class ItemsAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView (int position, View convertView, ViewGroup parent){
+    public View getView (final int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(context);
         View item = inflater.inflate(R.layout.activity_vista_item,null);
+
+        Button eliminar = item.findViewById(R.id.button5);
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datos.remove(position);
+                notifyDataSetChanged();
+
+            }
+        });
 
         ImageView imagen = (ImageView) item.findViewById(R.id.imageViewFotoItem);
         //imagen.setImageResource(datos.get(position).getDrawableImageID());

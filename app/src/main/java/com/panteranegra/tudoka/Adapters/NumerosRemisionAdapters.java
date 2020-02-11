@@ -40,6 +40,7 @@ public class NumerosRemisionAdapters extends ArrayAdapter {
             @Override
             public void onClick(View view) {
                 datos.remove(position);
+                notifyDataSetChanged();
             }
         });
 
