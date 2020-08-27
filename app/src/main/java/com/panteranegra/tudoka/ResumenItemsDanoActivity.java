@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -25,8 +27,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -56,19 +62,22 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
 
     ListView contenido;
     ReporteDano reporte;
-
+    private FirebaseAuth mAuth;
+    String userId, nombreUser, emailUser;
     String idReporteGenerado="";
     ProgressDialog progress;
     int flag=0;
+    EditText numeroDevolucion;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumen_items_dano);
-
+        getUser();
         reporte = (ReporteDano) getIntent().getExtras().getSerializable("reporte");
 
+        numeroDevolucion = (EditText) findViewById(R.id.et_no_devolucion_dano);
         progress= new ProgressDialog(this);
 
         progress.setTitle("Guardando");
@@ -91,14 +100,51 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         continuarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progress.show();
-                crearReporte();
+                if(numeroDevolucion.getText().toString().matches("")){
+                    Toast.makeText(getApplicationContext(),"Por favor ingresa un número de devolución", Toast.LENGTH_LONG);
+                }else{
+                    progress.show();
+                    crearReporte();
+                }
+
             }
         });
     }
 
 
+    public void getUser(){
+        mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        emailUser = mAuth.getCurrentUser().getEmail();
 
+        //Init DB
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+
+
+        final DocumentReference docRef = db.collection("users").document(userId);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    nombreUser = snapshot.getString("nombre");
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
+    }
 
     public void crearReporte(){
         progress.setMessage("Guardando en Base de Datos");
@@ -236,8 +282,9 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         map.put("numeroCliente", reporte.getCliente().getNumero());
         map.put("nombreProyecto", reporte.getProyecto().getNombre());
         map.put("numeroProyecto", reporte.getProyecto().getNumero());
-        map.put("nombreUsuario", "Nombre usuario");
-        map.put("emailUsuario", "emailusuario");
+        map.put("nombreUsuario", nombreUser);
+        map.put("emailUsuario", emailUser);
+        map.put("numeroDevolucion", numeroDevolucion.getText().toString());
         JSONObject jsonObject = new JSONObject(map);
         String url = "https://www.themyt.com/reportedoka/reporte_danoAndroid.php";
 

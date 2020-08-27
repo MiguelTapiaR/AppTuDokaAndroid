@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +15,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.panteranegra.tudoka.Interface.IfFirebaseLoadDone;
@@ -39,13 +45,13 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
     private ArrayList<Cliente> alCliente;
     private ArrayList<Proyecto> alProyectos;
     ProgressDialog progress;
-
+    private static final String TAG = "DocSnippets";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_envio);
-
+        getUser();
         progress= new ProgressDialog(this);
 
         progress.setTitle("Cargando");
@@ -56,6 +62,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         reporteEnvio.setAlListasCarga(new ArrayList<String>());
         reporteEnvio.setAlNumerosRemision(new ArrayList<String>());
         reporteEnvio.setAlURLListasCarga(new ArrayList<String>());
+
 
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
@@ -233,6 +240,40 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
     @Override
     public void onFirebaseLoadFailed(String message) {
 
+    }
+
+    public void getUser(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userId = mAuth.getCurrentUser().getUid();
+        String emailUser = mAuth.getCurrentUser().getEmail();
+
+        //Init DB
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+
+
+        final DocumentReference docRef = db.collection("users").document(userId);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    String nombreUser = snapshot.getString("nombre");
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
     }
 
 

@@ -27,7 +27,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:autoText="true"
-            android:text="Agregar Item"
+            android:text="@string/agregar_item"
             android:textAlignment="center"
             android:textColor="#004a8e"
             android:textColorLink="#004a8e"
@@ -53,7 +53,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#004a8e"
-            android:text="Tomar Fotografía"
+            android:text="@string/tomar_foto"
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="#ffffff" />
@@ -66,7 +66,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
-            android:text="Nombre de la Pieza"
+            android:text="@string/nombre_pieza"
             android:textColor="#004a8e" />
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/searchable_spinner_nombre_item_envio"
@@ -85,7 +85,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
-            android:text="Código de la Pieza"
+            android:text="@string/codigo_pieza"
             android:textColor="#004a8e"/>
 
 
@@ -109,7 +109,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
-            android:text="Número de piezas"
+            android:text="@string/numero_piezas"
             android:textColor="#004a8e"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,7 @@
 
         <Button
             android:id="@+id/continuar_envio_btn"
-            android:text="Continuar "
+            android:text="@string/continuar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"

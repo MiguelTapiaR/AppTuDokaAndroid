@@ -8,14 +8,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         />
+
     <Button
         android:id="@+id/btn_eliminar_lista_carga"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
-        android:textColor="@color/rojo"
-        android:text="Eliminar"
-        />
+        android:layout_weight="1"
+        android:text="@string/eliminar"
+        android:textColor="@color/rojo" />
 
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -32,14 +33,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.panteranegra.tudoka.Adapters.NumerosRemisionAdapters;
 import com.panteranegra.tudoka.Model.Actividad;
 import com.panteranegra.tudoka.Model.Auxiliares;
+import com.panteranegra.tudoka.Model.Cliente;
 import com.panteranegra.tudoka.Model.MySingleton;
 import com.panteranegra.tudoka.Model.Pieza;
 import com.panteranegra.tudoka.Model.ReporteEnvio;
@@ -55,6 +64,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class NumerosRemisionActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
     ReporteEnvio reporte;
     NumerosRemisionAdapters adapter;
     ListView lista;
@@ -69,6 +79,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
     int flagDocumentosCarga=0;
     int flagItems =0;
     int flagRemisiones =0;
+    String userId, nombreUser, emailUser;
 
     EditText numeroRemisionET;
     Button agregarRemisionBTN, finalizarReporteBTN;
@@ -76,7 +87,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numeros_revision);
-
+        getUser();
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
 
         progress= new ProgressDialog(this);
@@ -84,6 +95,9 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         progress.setTitle("Guardando");
 
         numeroRemisionET = findViewById(R.id.et_numero_remision);
+
+
+
 
         lista = findViewById(R.id.lista_numeros_remision);
         adapter = new NumerosRemisionAdapters(getApplicationContext(),reporte.getAlNumerosRemision());
@@ -110,6 +124,39 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
     }
+    public void getUser(){
+        mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        emailUser = mAuth.getCurrentUser().getEmail();
+
+        //Init DB
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+
+
+        final DocumentReference docRef = db.collection("users").document(userId);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    nombreUser = snapshot.getString("nombre");
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
+    }
 
     public void crearReporte(){
         Long fecha = System.currentTimeMillis();
@@ -117,7 +164,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         Map<String, Object> docData = new HashMap<>();
         docData.put("cliente", reporte.getCliente().getKey());
         docData.put("fechaCreacion", fecha);
-        docData.put("idUsuario", "keyUsuario");
+        docData.put("idUsuario", userId);
         docData.put("pais", "MX");
         docData.put("proyecto", reporte.getProyecto().getKey());
 
@@ -502,7 +549,10 @@ public class NumerosRemisionActivity extends AppCompatActivity {
                 });
     }
 
+
     public void crearPDF(){
+
+
 
         progress.setMessage("Generando pdf");
         ArrayList<String> emails = new ArrayList<>();
@@ -516,8 +566,8 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         map.put("numeroCliente", reporte.getCliente().getNumero());
         map.put("nombreProyecto", reporte.getProyecto().getNombre());
         map.put("numeroProyecto", reporte.getProyecto().getNumero());
-        map.put("nombreUsuario", "Nombre usuario");
-        map.put("emailUsuario", "emailusuario");
+        map.put("nombreUsuario", nombreUser);
+        map.put("emailUsuario", emailUser);
 
         //transporte
         map.put("urlFotoLicencia",reporte.getUrlFotoLicencia());

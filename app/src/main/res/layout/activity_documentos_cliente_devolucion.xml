@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Documentos cliente"
+        android:text="@string/documentos_cliente"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/azul"
@@ -28,7 +28,7 @@
         android:id="@+id/btn_nuevo_documento_cliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nuevo documento cliente"
+        android:text="@string/nuevo_documento_cliente"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:background="@color/azul"
@@ -41,7 +41,7 @@
         />
     <Button
         android:id="@+id/btn_continuar_documento_cliente"
-        android:text="Continuar"
+        android:text="@string/continuar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"

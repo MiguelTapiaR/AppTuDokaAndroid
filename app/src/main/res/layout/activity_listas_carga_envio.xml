@@ -14,7 +14,7 @@
         <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listas de carga"
+        android:text="@string/listas_carga"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/azul"
@@ -26,7 +26,7 @@
         android:id="@+id/btn_nueva_lista_carga"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nueva lista carga"
+        android:text="@string/nueva_lista_carga"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:background="@color/azul"
@@ -39,7 +39,7 @@
         />
     <Button
         android:id="@+id/btn_continuar_lista_carga"
-        android:text="Continuar"
+        android:text="@string/continuar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"

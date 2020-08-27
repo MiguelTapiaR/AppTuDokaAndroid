@@ -18,25 +18,22 @@
             android:orientation="vertical">
 
 
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="331dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:autoText="true"
-        android:gravity="center"
-        android:text="Resumen de Items"
-        android:textAlignment="center"
-        android:textColor="#004a8e"
-        android:textColorLink="#004a8e"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="331dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:autoText="true"
+                android:gravity="center"
+                android:text="@string/resumen_items"
+                android:textAlignment="center"
+                android:textColor="#004a8e"
+                android:textColorLink="#004a8e"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
     <ListView
         android:id="@+id/list_view_items"
@@ -49,35 +46,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="267dp"
-                android:layout_height="49dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="56dp"
-                android:backgroundTint="#004a8e"
-                android:text="Finalizar"
-                android:textColor="#ffffff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="267dp"
                 android:layout_height="49dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_gravity="center"
                 android:backgroundTint="#004a8e"
-                android:text="Nuevo Item"
+                android:text="@string/nuevo_item"
                 android:textColor="#ffffff"
                 app:layout_constraintBottom_toTopOf="@+id/button8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_view_items" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="267dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                android:backgroundTint="#004a8e"
+                android:text="@string/finalizar"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

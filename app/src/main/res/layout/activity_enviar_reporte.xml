@@ -11,7 +11,7 @@
         android:layout_marginEnd="8dp"
         android:autoText="true"
         android:gravity="center"
-        android:text="Enviar reporte"
+        android:text="@string/enviar_reporte"
         android:textAlignment="center"
         android:textColor="#004a8e"
         android:textColorLink="#004a8e"
@@ -110,7 +110,7 @@
     </LinearLayout>
     <Button
         android:id="@+id/btn_enviar_correos"
-        android:text="Enviar "
+        android:text="@string/enviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
@@ -122,7 +122,7 @@
 
     <Button
         android:id="@+id/btn_salir"
-        android:text="Salir "
+        android:text="@string/salir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"

@@ -16,24 +16,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="331dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:autoText="true"
-        android:gravity="center"
-        android:text="Resumen de Actividades"
-        android:textAlignment="center"
-        android:textColor="#004a8e"
-        android:textColorLink="#004a8e"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="331dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:autoText="true"
+                android:gravity="center"
+                android:text="@string/resumen_actividades"
+                android:textAlignment="center"
+                android:textColor="#004a8e"
+                android:textColorLink="#004a8e"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
 
     <ListView
         android:id="@+id/list_view_items"
@@ -43,31 +42,32 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="#F5F2F2" />
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="267dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#004a8e"
-        android:text="Nuevo Item"
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:layout_gravity="center"/>
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="267dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
-        android:backgroundTint="#004a8e"
-        android:text="Finalizar reporte"
-        android:textColor="#ffffff"
-        android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="267dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#004a8e"
+                android:gravity="center"
+                android:text="@string/nuevo_item"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="267dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="56dp"
+                android:backgroundTint="#004a8e"
+                android:text="@string/finalizar"
+                android:textColor="#ffffff" />
 
 
 

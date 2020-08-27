@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blanco"
-                android:text="E-mail"
+                android:text="@string/email"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
@@ -33,7 +33,7 @@
                 android:id="@+id/email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail "
+                android:hint="@string/email"
                 android:background="@color/blanco"
                 android:padding="10dp"
                 android:layout_marginTop="10dp"
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blanco"
-                android:text="Contraseña"
+                android:text="@string/password"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
@@ -55,7 +55,7 @@
                 android:id="@+id/password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:background="@color/blanco"
                 android:padding="10dp"
                 android:inputType="textPassword"
@@ -75,7 +75,7 @@
                 android:textColor="@color/blanco"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Iniciar sesión"/>
+                android:text="@string/login"/>
 
 
         </LinearLayout>

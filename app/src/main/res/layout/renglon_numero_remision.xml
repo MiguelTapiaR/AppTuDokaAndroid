@@ -12,18 +12,18 @@
         android:textSize="18dp"
         android:layout_gravity="center"
         />
+
     <Button
         android:id="@+id/btn_eliminar_numero_remision"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
-        android:textColor="@color/rojo"
-        android:text="Eliminar"
-        android:background="@color/blanco"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        />
+        android:layout_weight="1"
+        android:background="@color/blanco"
+        android:text="@string/eliminar"
+        android:textColor="@color/rojo" />
 
 
 </LinearLayout>

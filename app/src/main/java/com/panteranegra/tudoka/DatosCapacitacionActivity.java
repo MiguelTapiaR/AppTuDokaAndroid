@@ -137,9 +137,15 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
                 if(reporte.getCliente().getNombre().matches("Selecciona...")||reporte.getProyecto().getNombre().matches("Selecciona...")){
                     Toast.makeText(getApplicationContext(),"Selecciona un cliente y un proyecto",Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent = new Intent(getApplicationContext(), MostrarDatosCapacitacionActivity.class);
-                    intent.putExtra("reporte", reporte);
-                    startActivity(intent);
+                    if(etNombreCurso.getText().toString().matches("")){
+                        Toast.makeText(getApplicationContext(),"Escribe un nombre de curso",Toast.LENGTH_SHORT).show();
+                    }else{
+                        reporte.setNombreCurso(etNombreCurso.getText().toString());
+                        Intent intent = new Intent(getApplicationContext(), MostrarDatosCapacitacionActivity.class);
+                        intent.putExtra("reporte", reporte);
+                        startActivity(intent);
+                    }
+
                 }
             }
         });

@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -28,8 +29,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -57,6 +62,8 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
     private static final String TAG = "DocSnippets";
     Button continuarBtn;
 
+    private FirebaseAuth mAuth;
+    String userId, nombreUser, emailUser;
     ListView contenido;
     ReporteCapacitacion reporte;
     String idReporteGenerado="";
@@ -70,6 +77,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumen_actividad_capacitacion);
 
+        getUser();
 
 
 
@@ -111,7 +119,39 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
             }
         });
     }
+    public void getUser(){
+        mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        emailUser = mAuth.getCurrentUser().getEmail();
 
+        //Init DB
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+
+
+        final DocumentReference docRef = db.collection("users").document(userId);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    nombreUser = snapshot.getString("nombre");
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
+    }
     public void crearReporte(){
         progress.setMessage("Guardando en Base de Datos");
         Long fecha = System.currentTimeMillis();
@@ -246,8 +286,8 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
         map.put("numeroCliente", reporte.getCliente().getNumero());
         map.put("nombreProyecto", reporte.getProyecto().getNombre());
         map.put("numeroProyecto", reporte.getProyecto().getNumero());
-        map.put("nombreUsuario", "Nombre usuario");
-        map.put("emailUsuario", "emailusuario");
+        map.put("nombreUsuario", nombreUser);
+        map.put("emailUsuario", emailUser);
         map.put("nombreCurso", reporte.getNombreCurso());
         JSONObject jsonObject = new JSONObject(map);
         String url = "https://www.themyt.com/reportedoka/reporteCapacitacionAndroid.php";

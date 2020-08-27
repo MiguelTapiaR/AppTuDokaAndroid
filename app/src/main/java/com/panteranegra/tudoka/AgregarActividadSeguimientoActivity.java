@@ -46,7 +46,7 @@ public class AgregarActividadSeguimientoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_actividad_capacitacion);
+        setContentView(R.layout.activity_agregar_actividad_seguimiento);
 
 
         actividad = new Actividad();
