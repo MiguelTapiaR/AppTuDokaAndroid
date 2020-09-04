@@ -79,7 +79,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
     int flagDocumentosCarga=0;
     int flagItems =0;
     int flagRemisiones =0;
-    String userId, nombreUser, emailUser;
+    String userId, nombreUser, emailUser, paisUser;
 
     EditText numeroRemisionET;
     Button agregarRemisionBTN, finalizarReporteBTN;
@@ -92,7 +92,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
         progress= new ProgressDialog(this);
 
-        progress.setTitle("Guardando");
+        progress.setTitle(R.string.guardando);
 
         numeroRemisionET = findViewById(R.id.et_numero_remision);
 
@@ -132,9 +132,6 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         //Init DB
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-
-
         final DocumentReference docRef = db.collection("users").document(userId);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -151,6 +148,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, source + " data: " + snapshot.getData());
                     nombreUser = snapshot.getString("nombre");
+                    paisUser = snapshot.getString("pais");
                 } else {
                     Log.d(TAG, source + " data: null");
                 }
@@ -165,7 +163,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         docData.put("cliente", reporte.getCliente().getKey());
         docData.put("fechaCreacion", fecha);
         docData.put("idUsuario", userId);
-        docData.put("pais", "MX");
+        docData.put("pais", paisUser);
         docData.put("proyecto", reporte.getProyecto().getKey());
 
                         // Get new Instance ID token
@@ -190,7 +188,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
     }
     public void cargarFotosTransporte(){
-        progress.setMessage("Subiendo fotos transporte");
+        progress.setMessage(getString(R.string.subiendo_fotos_transporte));
         subirFotosTransporte(reporte.getFotoLicencia(),0);
         subirFotosTransporte(reporte.getFotoPlacaDelantera(),1);
         subirFotosTransporte(reporte.getFotoPlacaTrasera(),2);
@@ -295,7 +293,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         flag++;
                         if(flag==1){
-                            Toast.makeText(getApplicationContext(),"Fotos transporte subidas", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(),"Fotos transporte subidas", Toast.LENGTH_SHORT).show();
                             cargaFotosDocumentosCarga();
                         }
                     }
@@ -310,7 +308,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
     }
     public Boolean cargaFotosDocumentosCarga(){
-        progress.setMessage("Subiendo documentos de carga");
+        progress.setMessage(getString(R.string.subiendo_docs_carga));
 
         if(reporte.getAlListasCarga().isEmpty()){
             cargaItems();
@@ -409,7 +407,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
     public Boolean cargaItems(){
-        progress.setMessage("Subiendo items");
+        progress.setMessage(getString(R.string.subiendo_items));
         if(reporte.getAlPiezas().isEmpty()){
             cargaRemisiones();
         }else{
@@ -506,7 +504,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
     public Boolean cargaRemisiones(){
-        progress.setMessage("Subiendo remisiones");
+        progress.setMessage(getString(R.string.subiendo_remisiones));
         if(reporte.getAlNumerosRemision().isEmpty()){
             crearPDF();
         }else{
@@ -554,7 +552,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
 
 
 
-        progress.setMessage("Generando pdf");
+        progress.setMessage(getString(R.string.generando_pdf));
         ArrayList<String> emails = new ArrayList<>();
         emails.add("rmontoya@themyt.com");
         HashMap<String, Object> map = new HashMap<>();// Mapeo previo
@@ -568,6 +566,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         map.put("numeroProyecto", reporte.getProyecto().getNumero());
         map.put("nombreUsuario", nombreUser);
         map.put("emailUsuario", emailUser);
+        map.put("paisUsuario", paisUser);
 
         //transporte
         map.put("urlFotoLicencia",reporte.getUrlFotoLicencia());

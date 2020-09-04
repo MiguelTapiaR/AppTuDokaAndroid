@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         progress = new ProgressDialog(this);
 
-        progress.setTitle("Cargando");
+        progress.setTitle(R.string.cargando);
 
 
         emailET = findViewById(R.id.email_login);

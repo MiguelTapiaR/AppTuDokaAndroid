@@ -62,12 +62,12 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
         searchableSpinnerNomItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item_envio);
         searchableSpinnerCodigoItem = (SearchableSpinner)findViewById(R.id.searchable_spinner_codigo_item_envio);
 
-        searchableSpinnerNomItem.setPositiveButton("Cerrar");
-        searchableSpinnerNomItem.setTitle("Seleccionar Item");
+        searchableSpinnerNomItem.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomItem.setTitle(getString(R.string.seleccionar_item));
 
 
-        searchableSpinnerCodigoItem.setPositiveButton("Cerrar");
-        searchableSpinnerCodigoItem.setTitle("Seleccionar Item");
+        searchableSpinnerCodigoItem.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerCodigoItem.setTitle(getString(R.string.seleccionar_item));
 
 
 
@@ -75,7 +75,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
 
 
         alPieza = new ArrayList<>();
-        alPieza.add(new Pieza("-1", "Selecciona...", "Selecciona",  "MX"));
+        alPieza.add(new Pieza("-1", getString(R.string.selecciona), "Selecciona",  "MX"));
 
         //recibir el modelo
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");

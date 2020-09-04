@@ -52,13 +52,13 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
         reporteDevolucion.setAlURLListasCarga(new ArrayList<String>());
         progress= new ProgressDialog(this);
 
-        progress.setTitle("Cargando");
+        progress.setTitle(R.string.cargando);
 
         progress.show();
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
-        alCliente.add(new Cliente("","Selecciona...","Selecciona...",""));
-        alProyectos.add(new Proyecto("","","Selecciona...","Selecciona...",""));
+        alCliente.add(new Cliente("",getString(R.string.selecciona),getString(R.string.selecciona),""));
+        alProyectos.add(new Proyecto("","",getString(R.string.selecciona),getString(R.string.selecciona),""));
 
 
 
@@ -67,14 +67,14 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
         searchableSpinnerNomProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner4);
         searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
 
-        searchableSpinnerNomCliente.setTitle("Seleccionar Item");
-        searchableSpinnerNoCliente.setTitle("Seleccionar Item");
-        searchableSpinnerNomProyecto.setTitle("Seleccionar Item");
-        searchableSpinnerNoProyecto.setTitle("Seleccionar Item");
-        searchableSpinnerNoProyecto.setPositiveButton("Cerrar");
-        searchableSpinnerNomProyecto.setPositiveButton("Cerrar");
-        searchableSpinnerNomCliente.setPositiveButton("Cerrar");
-        searchableSpinnerNoCliente.setPositiveButton("Cerrar");
+        searchableSpinnerNomCliente.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoCliente.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNomProyecto.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoProyecto.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoProyecto.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomProyecto.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomCliente.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNoCliente.setPositiveButton(getString(R.string.cerrar));
 
         searchableSpinnerNomCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -131,7 +131,7 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
         guardarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(reporteDevolucion.getCliente().getNombre().matches("Selecciona...")||reporteDevolucion.getProyecto().getNombre().matches("Selecciona...")){
+                if(reporteDevolucion.getCliente().getNombre().matches(getString(R.string.selecciona))||reporteDevolucion.getProyecto().getNombre().matches(getString(R.string.selecciona))){
                     Toast.makeText(getApplicationContext(),"Selecciona un cliente y un proyecto",Toast.LENGTH_SHORT).show();
                 }else {
                     Intent intent = new Intent(getApplicationContext(), MostrarDatosDevolucionActivity.class);

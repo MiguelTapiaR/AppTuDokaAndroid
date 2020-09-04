@@ -54,7 +54,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         getUser();
         progress= new ProgressDialog(this);
 
-        progress.setTitle("Cargando");
+        progress.setTitle(R.string.cargando);
 
         progress.show();
         reporteEnvio = new ReporteEnvio();
@@ -67,8 +67,8 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
 
-        alCliente.add(new Cliente("","Selecciona...","Selecciona...",""));
-        alProyectos.add(new Proyecto("","","Selecciona...","Selecciona...",""));
+        alCliente.add(new Cliente("",getString(R.string.selecciona),"Selecciona...",""));
+        alProyectos.add(new Proyecto("","",getString(R.string.selecciona),"Selecciona...",""));
 
 
 
@@ -80,14 +80,14 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
 
         searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
 
-        searchableSpinnerNomCliente.setTitle("Seleccionar Item");
-        searchableSpinnerNoCliente.setTitle("Seleccionar Item");
-        searchableSpinnerNomProyecto.setTitle("Seleccionar Item");
-        searchableSpinnerNoProyecto.setTitle("Seleccionar Item");
-        searchableSpinnerNoProyecto.setPositiveButton("Cerrar");
-        searchableSpinnerNomProyecto.setPositiveButton("Cerrar");
-        searchableSpinnerNomCliente.setPositiveButton("Cerrar");
-        searchableSpinnerNoCliente.setPositiveButton("Cerrar");
+        searchableSpinnerNomCliente.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoCliente.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNomProyecto.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoProyecto.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoProyecto.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomProyecto.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomCliente.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNoCliente.setPositiveButton(getString(R.string.cerrar));
         searchableSpinnerNomCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -144,7 +144,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
             @Override
             public void onClick(View view) {
 
-                if(reporteEnvio.getCliente().getNombre().matches("Selecciona...")||reporteEnvio.getProyecto().getNombre().matches("Selecciona...")){
+                if(reporteEnvio.getCliente().getNombre().matches(getString(R.string.selecciona))||reporteEnvio.getProyecto().getNombre().matches("Selecciona...")){
                     Toast.makeText(getApplicationContext(),"Selecciona un cliente y un proyecto",Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent = new Intent(getApplicationContext(), MostrarDatosEnvioActivity.class);

@@ -67,7 +67,7 @@
     <string name="instrucciones_numero_devolucion">Escribe el número de devolución y da click en Agregar</string>
     <string name="numero_devolucion">Número de devolución...</string>saul.ro
     <string name="selecionar_item">Seleccionar Item</string>
-    <string name="cerrar">Cerrar</string>
+
     <string name="tipo_dano">Tipo de daño</string>
     <string name="no_devolucion">No. devolución</string>
     <string name="enviar_reporte">Enviar reporte</string>
@@ -82,13 +82,18 @@
     <string name="agregar_actividad_seguimiento">Agregar actividad de seguimiento</string>
 
     <string name="agregar">Agregar</string>
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
+    <string name="cargando">Cargando</string>
+    <string name="seleccionar_item">Seleccionar item</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="exito_guardar">Éxito al guardar</string>
+    <string name="guardando">Guardando</string>
+    <string name="subiendo_docs_carga">Subiendo documentos de carga</string>
+    <string name="subiendo_remisiones">Subiendo números de remisión</string>
+    <string name="subiendo_fotos_transporte">Subiendo fotos transporte</string>
+    <string name="subiendo_items">Subiendo items</string>
+    <string name="generando_pdf">Generando PDF</string>
+    <string name="error_mail">Escribe al menos un email</string>
+    <string name="reporte_generado_exito">Reporte generado con éxito</string>
 <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->

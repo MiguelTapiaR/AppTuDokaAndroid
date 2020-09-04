@@ -52,15 +52,15 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
 
         progress= new ProgressDialog(this);
 
-        progress.setTitle("Cargando");
+        progress.setTitle(R.string.cargando);
 
         progress.show();
 
         alCliente = new ArrayList<>();
         alProyectos = new ArrayList<>();
 
-        alCliente.add(new Cliente("","Selecciona...","Selecciona...",""));
-        alProyectos.add(new Proyecto("","","Selecciona...","Selecciona...",""));
+        alCliente.add(new Cliente("",getString(R.string.selecciona),"Selecciona...",""));
+        alProyectos.add(new Proyecto("","",getString(R.string.selecciona),"Selecciona...",""));
 
 
         searchableSpinnerNomCliente = (SearchableSpinner)findViewById(R.id.searchable_spinner_nombre_item);
@@ -68,14 +68,14 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         searchableSpinnerNomProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner4);
         searchableSpinnerNoProyecto = (SearchableSpinner)findViewById(R.id.searchable_spinner_numero_item);
 
-        searchableSpinnerNomCliente.setTitle("Seleccionar Item");
-        searchableSpinnerNoCliente.setTitle("Seleccionar Item");
-        searchableSpinnerNomProyecto.setTitle("Seleccionar Item");
-        searchableSpinnerNoProyecto.setTitle("Seleccionar Item");
-        searchableSpinnerNoProyecto.setPositiveButton("Cerrar");
-        searchableSpinnerNomProyecto.setPositiveButton("Cerrar");
-        searchableSpinnerNomCliente.setPositiveButton("Cerrar");
-        searchableSpinnerNoCliente.setPositiveButton("Cerrar");
+        searchableSpinnerNomCliente.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoCliente.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNomProyecto.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoProyecto.setTitle(getString(R.string.seleccionar_item));
+        searchableSpinnerNoProyecto.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomProyecto.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomCliente.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNoCliente.setPositiveButton(getString(R.string.cerrar));
 
         etNombreCurso = findViewById(R.id.nombre_curso);
 
@@ -134,7 +134,7 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
         guardarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(reporte.getCliente().getNombre().matches("Selecciona...")||reporte.getProyecto().getNombre().matches("Selecciona...")){
+                if(reporte.getCliente().getNombre().matches(getString(R.string.selecciona))||reporte.getProyecto().getNombre().matches(getString(R.string.selecciona))){
                     Toast.makeText(getApplicationContext(),"Selecciona un cliente y un proyecto",Toast.LENGTH_SHORT).show();
                 }else {
                     if(etNombreCurso.getText().toString().matches("")){

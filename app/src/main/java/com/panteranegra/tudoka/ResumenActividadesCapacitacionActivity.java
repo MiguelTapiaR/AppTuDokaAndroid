@@ -63,7 +63,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
     Button continuarBtn;
 
     private FirebaseAuth mAuth;
-    String userId, nombreUser, emailUser;
+    String userId, nombreUser, emailUser, paisUser;
     ListView contenido;
     ReporteCapacitacion reporte;
     String idReporteGenerado="";
@@ -84,7 +84,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
         reporte = (ReporteCapacitacion) getIntent().getExtras().getSerializable("reporte");
          progress= new ProgressDialog(this);
 
-        progress.setTitle("Guardando");
+        progress.setTitle(getString(R.string.guardando));
 
 
 
@@ -146,6 +146,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, source + " data: " + snapshot.getData());
                     nombreUser = snapshot.getString("nombre");
+                    paisUser = snapshot.getString("pais");
                 } else {
                     Log.d(TAG, source + " data: null");
                 }
@@ -160,7 +161,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
         docData.put("cliente", reporte.getCliente().getKey());
         docData.put("fechaCreacion", fecha);
         docData.put("idUsuario", "keyUsuario");
-        docData.put("pais", "MX");
+        docData.put("pais", paisUser);
         docData.put("proyecto", reporte.getProyecto().getKey());
 
         // Get new Instance ID token
@@ -274,7 +275,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
 
     public void crearPDF(){
 
-        progress.setMessage("Generando pdf");
+        progress.setMessage(getString(R.string.generando_pdf));
         ArrayList<String> emails = new ArrayList<>();
         emails.add("rmontoya@themyt.com");
         HashMap<String, Object> map = new HashMap<>();// Mapeo previo
@@ -288,6 +289,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
         map.put("numeroProyecto", reporte.getProyecto().getNumero());
         map.put("nombreUsuario", nombreUser);
         map.put("emailUsuario", emailUser);
+        map.put("paisUsuario", paisUser);
         map.put("nombreCurso", reporte.getNombreCurso());
         JSONObject jsonObject = new JSONObject(map);
         String url = "https://www.themyt.com/reportedoka/reporteCapacitacionAndroid.php";

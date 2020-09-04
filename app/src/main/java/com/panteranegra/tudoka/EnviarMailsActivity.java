@@ -98,7 +98,7 @@ public class EnviarMailsActivity extends AppCompatActivity {
 
 
     public void enviarPDF(ArrayList<String> alMails){
-        Toast.makeText(getApplicationContext(),"Exito al guardar", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),getText(R.string.exito_guardar), Toast.LENGTH_SHORT).show();
         progress.setMessage("Enviando ...");
 //        ArrayList<String> emails = new ArrayList<>();
 //        emails.add("rmontoya@themyt.com");

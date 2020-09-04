@@ -67,24 +67,24 @@ public class AgregarItemDanoActivity  extends AppCompatActivity implements IfFir
         searchableSpinnerTipoDano = (SearchableSpinner)findViewById(R.id.searchable_spinner_tipo_dano);
 
 
-        searchableSpinnerNomItem.setPositiveButton("Cerrar");
-        searchableSpinnerNomItem.setTitle("Seleccionar Item");
+        searchableSpinnerNomItem.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerNomItem.setTitle(getString(R.string.seleccionar_item));
 
 
-        searchableSpinnerCodigoItem.setPositiveButton("Cerrar");
-        searchableSpinnerCodigoItem.setTitle("Seleccionar Item");
+        searchableSpinnerCodigoItem.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerCodigoItem.setTitle(getString(R.string.seleccionar_item));
 
-        searchableSpinnerTipoDano.setPositiveButton("Cerrar");
-        searchableSpinnerTipoDano.setTitle("Seleccionar Item");
+        searchableSpinnerTipoDano.setPositiveButton(getString(R.string.cerrar));
+        searchableSpinnerTipoDano.setTitle(getString(R.string.seleccionar_item));
 
 
         unidadesET = findViewById(R.id.unidades_envio);
 
 
         alPieza = new ArrayList<>();
-        alPieza.add(new Pieza("-1", "Selecciona...", "Selecciona...",  "MX"));
+        alPieza.add(new Pieza("-1", getString(R.string.selecciona), "Selecciona...",  "MX"));
         alDano = new ArrayList<>();
-        alDano.add("Selecciona...");
+        alDano.add( getString(R.string.selecciona));
 
         //recibir el modelo
         reporte = (ReporteDano) getIntent().getExtras().getSerializable("reporte");

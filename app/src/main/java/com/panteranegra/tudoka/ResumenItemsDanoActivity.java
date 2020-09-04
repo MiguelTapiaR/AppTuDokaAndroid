@@ -63,7 +63,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
     ListView contenido;
     ReporteDano reporte;
     private FirebaseAuth mAuth;
-    String userId, nombreUser, emailUser;
+    String userId, nombreUser, emailUser, paisUser;
     String idReporteGenerado="";
     ProgressDialog progress;
     int flag=0;
@@ -80,7 +80,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         numeroDevolucion = (EditText) findViewById(R.id.et_no_devolucion_dano);
         progress= new ProgressDialog(this);
 
-        progress.setTitle("Guardando");
+        progress.setTitle(getString(R.string.guardando));
         contenido = findViewById(R.id.list_view_items);
         adapter = new ItemsAdapter(getApplicationContext(),reporte.getAlPiezas());
         contenido.setAdapter(adapter);
@@ -139,6 +139,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, source + " data: " + snapshot.getData());
                     nombreUser = snapshot.getString("nombre");
+                    paisUser = snapshot.getString("pais");
                 } else {
                     Log.d(TAG, source + " data: null");
                 }
@@ -154,7 +155,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         docData.put("cliente", reporte.getCliente().getKey());
         docData.put("fechaCreacion", fecha);
         docData.put("idUsuario", "keyUsuario");
-        docData.put("pais", "MX");
+        docData.put("pais", paisUser);
         docData.put("proyecto", reporte.getProyecto().getKey());
 
         // Get new Instance ID token
@@ -270,7 +271,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
 
     public void crearPDF(){
 
-        progress.setMessage("Generando pdf");
+        progress.setMessage(getString(R.string.generando_pdf));
         ArrayList<String> emails = new ArrayList<>();
         emails.add("rmontoya@themyt.com");
         HashMap<String, Object> map = new HashMap<>();// Mapeo previo
@@ -284,6 +285,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         map.put("numeroProyecto", reporte.getProyecto().getNumero());
         map.put("nombreUsuario", nombreUser);
         map.put("emailUsuario", emailUser);
+        map.put("paisUsuario", paisUser);
         map.put("numeroDevolucion", numeroDevolucion.getText().toString());
         JSONObject jsonObject = new JSONObject(map);
         String url = "https://www.themyt.com/reportedoka/reporte_danoAndroid.php";
