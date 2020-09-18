@@ -23,6 +23,7 @@ public class ResumenItemsEnvioActivity extends AppCompatActivity {
 
     ListView contenido;
     ReporteEnvio reporte;
+    String pais;
 
 
     @Override
@@ -32,7 +33,7 @@ public class ResumenItemsEnvioActivity extends AppCompatActivity {
 
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
 
-
+        pais = getIntent().getExtras().getString("pais");
         contenido = findViewById(R.id.list_view_items);
 
         adapter = new ItemsAdapter(getApplicationContext(),reporte.getAlPiezas());
@@ -44,6 +45,7 @@ public class ResumenItemsEnvioActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AgregarItemEnvioActivity.class);
                 //para pasar el modelo
                 intent.putExtra("reporte", reporte);
+                intent.putExtra("pais", pais);
                 startActivity(intent);
             }
         });
@@ -55,6 +57,7 @@ public class ResumenItemsEnvioActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ListasCargasEnvioActivity.class);
                 //para pasar el modelo
                 intent.putExtra("reporte", reporte);
+                intent.putExtra("pais", pais);
                 startActivity(intent);
             }
         });

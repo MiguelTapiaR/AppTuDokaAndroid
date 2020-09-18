@@ -42,11 +42,13 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
     private ArrayList<Proyecto> alProyectos;
     EditText etNombreCurso;
     ProgressDialog progress;
-
+    private String pais;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reporte_capacitacion);
+
+        pais = getIntent().getExtras().getString("pais");
         reporte = new ReporteCapacitacion();
         reporte.setAlActividad(new ArrayList<Actividad>());
 
@@ -163,9 +165,10 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
-
-                                alCliente.add(new Cliente(document.getId(),document.getString("nombre"),document.getString("numero"),document.getString("pais")));
-                            }
+                                if(document.getString("pais").matches(pais)) {
+                                    alCliente.add(new Cliente(document.getId(), document.getString("nombre"), document.getString("numero"), document.getString("pais")));
+                                }
+                                }
                             onFirebaseLoadSuccess(alCliente);
                         } else {
                             //TODO TOast avisando error
@@ -181,8 +184,9 @@ public class DatosCapacitacionActivity extends AppCompatActivity  implements IfF
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-
-                                alProyectos.add(new Proyecto(document.getString("cliente"),document.getId(),document.getString("nombre"),document.getString("numero"), document.getString("pais")));
+                                if (document.getString("pais").matches(pais)) {
+                                    alProyectos.add(new Proyecto(document.getString("cliente"), document.getId(), document.getString("nombre"), document.getString("numero"), document.getString("pais")));
+                                }
                             }
                             onFirebaseLoadSuccessProyecto(alProyectos);
                         } else {

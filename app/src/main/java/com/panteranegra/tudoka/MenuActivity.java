@@ -1,12 +1,20 @@
 package com.panteranegra.tudoka;
 
 import android.content.Intent;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -14,11 +22,14 @@ public class MenuActivity extends AppCompatActivity {
     private Button devolucionBtn, danoBTN,obra, logout;
     private String cadena;
     private FirebaseAuth mAuth;
+    String userId, nombreUser, emailUser, paisUser;
+    private static final String TAG = "DocSnippets";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        getUser();
         // Botones
         envioBtn = findViewById(R.id.reporte_envio);
         devolucionBtn = findViewById(R.id.reporte_devolucion);
@@ -32,7 +43,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DatosEnvioActivity.class);
-
+                intent.putExtra("pais", paisUser);
                 startActivity(intent);
             }
         });
@@ -40,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DatosDevolucionActivity.class);
-
+                intent.putExtra("pais", paisUser);
                 startActivity(intent);
             }
         });
@@ -48,7 +59,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DatosDano.class);
-
+                intent.putExtra("pais", paisUser);
                 startActivity(intent);
             }
         });
@@ -56,7 +67,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReporteObraActivity.class);
-
+                intent.putExtra("pais", paisUser);
                 startActivity(intent);
             }
         });
@@ -67,6 +78,40 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                 startActivity(intent);
+            }
+        });
+    }
+    public void getUser(){
+        mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+        emailUser = mAuth.getCurrentUser().getEmail();
+
+        //Init DB
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+
+
+        final DocumentReference docRef = db.collection("users").document(userId);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    nombreUser = snapshot.getString("nombre");
+                    paisUser = snapshot.getString("pais");
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
             }
         });
     }

@@ -54,6 +54,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
     final int MY_PERMISSIONS_REQUEST = 0;
     private EasyImage easy_image;
 
+    String pais;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
         //recibir el modelo
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
 
+        pais = getIntent().getExtras().getString("pais");
 
 
         // Relacioinar con el xml
@@ -145,6 +147,7 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                     reporte.getAlPiezas().add(piezaSeleccionada);
                     Intent intent = new Intent(getApplicationContext(), ResumenItemsEnvioActivity.class);
                     intent.putExtra("reporte", reporte);
+                    intent.putExtra("pais", pais);
                     startActivity(intent);
                 }else{
 
@@ -186,7 +189,17 @@ public class AgregarItemEnvioActivity extends AppCompatActivity implements IfFir
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
 
-                                alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
+                                if(pais.matches("BR")){
+
+                                    if(document.get("descripcionPT")!=null){
+                                        alPieza.add(new Pieza(document.getId(),document.getString("descripcionPT"),document.getString("codigo"),document.getString("pais")));
+                                    }else{
+                                        alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
+                                    }
+                                }else{
+                                    alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
+                                }
+
                             }
                             onFirebaseLoadSuccess(alPieza);
                         } else {

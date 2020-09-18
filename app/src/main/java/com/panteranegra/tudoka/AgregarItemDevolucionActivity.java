@@ -183,7 +183,17 @@ public class AgregarItemDevolucionActivity extends AppCompatActivity implements 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
 
-                                alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
+
+                                if(reporte.getCliente().getPais().matches("BR")){
+
+                                    if(document.get("descripcionPT")!=null){
+                                        alPieza.add(new Pieza(document.getId(),document.getString("descripcionPT"),document.getString("codigo"),document.getString("pais")));
+                                    }else{
+                                        alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
+                                    }
+                                }else{
+                                    alPieza.add(new Pieza(document.getId(),document.getString("descripcion"),document.getString("codigo"),document.getString("pais")));
+                                }
                             }
                             onFirebaseLoadSuccess(alPieza);
                         } else {

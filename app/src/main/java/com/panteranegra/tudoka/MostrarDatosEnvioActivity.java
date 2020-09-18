@@ -14,6 +14,7 @@ public class MostrarDatosEnvioActivity extends AppCompatActivity {
     private Button tomarFotosBtn;
     private TextView nombreCliente, numeroCliente, nombreProyecto, numeroProyecto;
     private ReporteEnvio reporte;
+    String pais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MostrarDatosEnvioActivity extends AppCompatActivity {
 
         reporte = (ReporteEnvio) getIntent().getExtras().getSerializable("reporte");
 
+        pais = getIntent().getExtras().getString("pais");
         nombreCliente.setText(reporte.getCliente().getNombre());
         numeroCliente.setText(reporte.getCliente().getNumero());
 
@@ -40,6 +42,7 @@ public class MostrarDatosEnvioActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AgregarItemEnvioActivity.class);
                 intent.putExtra("reporte", reporte);
+                intent.putExtra("pais", pais);
                 startActivity(intent);
             }
         });

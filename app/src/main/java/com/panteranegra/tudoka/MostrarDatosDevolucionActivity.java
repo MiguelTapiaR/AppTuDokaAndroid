@@ -17,6 +17,7 @@ public class MostrarDatosDevolucionActivity extends AppCompatActivity {
     TextView nombreClienteTV, numeroClienteTV, nombreProyecto, numeroProyecto;
     Button continuarBTN;
 
+    String pais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class MostrarDatosDevolucionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_datos_devolucion);
 
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
-
+        pais = getIntent().getExtras().getString("pais");
         nombreClienteTV= findViewById(R.id.tv_nombre_cliente_devolucion);
         nombreClienteTV.setText(reporte.getCliente().getNombre());
 
@@ -42,6 +43,7 @@ public class MostrarDatosDevolucionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DocumentosClienteActivity.class);
                 intent.putExtra("reporte", reporte);
+                intent.putExtra("pais", pais);
                 startActivity(intent);
             }
         });

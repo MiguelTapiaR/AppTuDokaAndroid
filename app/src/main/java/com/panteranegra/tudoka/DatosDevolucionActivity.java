@@ -40,11 +40,13 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
     private ArrayList<Cliente> alCliente;
     private ArrayList<Proyecto> alProyectos;
     ProgressDialog progress;
-
+    private String pais;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
+
+        pais = getIntent().getExtras().getString("pais");
         reporteDevolucion = new ReporteDevolucion();
         reporteDevolucion.setAlPiezas(new ArrayList<Pieza>());
         reporteDevolucion.setAlListasCarga(new ArrayList<String>());
@@ -136,6 +138,7 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
                 }else {
                     Intent intent = new Intent(getApplicationContext(), MostrarDatosDevolucionActivity.class);
                     intent.putExtra("reporte", reporteDevolucion);
+                    intent.putExtra("pais", pais);
                     startActivity(intent);
                 }
             }
@@ -154,8 +157,9 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
-
-                                alCliente.add(new Cliente(document.getId(),document.getString("nombre"),document.getString("numero"),document.getString("pais")));
+                                if (document.getString("pais").matches(pais)) {
+                                    alCliente.add(new Cliente(document.getId(), document.getString("nombre"), document.getString("numero"), document.getString("pais")));
+                                }
                             }
                             onFirebaseLoadSuccess(alCliente);
                         } else {
@@ -172,8 +176,9 @@ public class DatosDevolucionActivity extends AppCompatActivity implements IfFire
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-
-                                alProyectos.add(new Proyecto(document.getString("cliente"),document.getId(),document.getString("nombre"),document.getString("numero"), document.getString("pais")));
+                                if (document.getString("pais").matches(pais)) {
+                                    alProyectos.add(new Proyecto(document.getString("cliente"), document.getId(), document.getString("nombre"), document.getString("numero"), document.getString("pais")));
+                                }
                             }
                             onFirebaseLoadSuccessProyecto(alProyectos);
                         } else {

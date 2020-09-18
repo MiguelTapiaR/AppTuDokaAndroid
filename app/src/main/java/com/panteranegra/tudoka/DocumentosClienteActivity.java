@@ -32,6 +32,7 @@ public class DocumentosClienteActivity extends AppCompatActivity {
     RenglonListasCargaAdapter adapter;
 
     Button btnContinuar, btnNuevaListaCarga;
+    String pais;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class DocumentosClienteActivity extends AppCompatActivity {
 
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
 
+        pais = getIntent().getExtras().getString("pais");;
         easy_image = new EasyImage.Builder(getBaseContext())
                 .setCopyImagesToPublicGalleryFolder(true)
                 .setFolderName("FotosDoka")
@@ -58,6 +60,7 @@ public class DocumentosClienteActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), NumerosDevolucionActivity.class);
                 //para pasar el modelo
                 intent.putExtra("reporte", reporte);
+                intent.putExtra("pais", pais);
                 startActivity(intent);
             }
         });

@@ -23,6 +23,7 @@ public class NumerosDevolucionActivity extends AppCompatActivity {
 
     EditText numeroRemisionET;
     Button agregarRemisionBTN, finalizarReporteBTN;
+    String pais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class NumerosDevolucionActivity extends AppCompatActivity {
 
         reporte = (ReporteDevolucion) getIntent().getExtras().getSerializable("reporte");
 
+        pais = getIntent().getExtras().getString("pais");
         numeroRemisionET = findViewById(R.id.et_numero_remision);
 
         lista = findViewById(R.id.lista_numeros_remision);
@@ -54,6 +56,8 @@ public class NumerosDevolucionActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), DatosTransporteDevolucionActivity.class);
                 //para pasar el modelo
                 intent.putExtra("reporte", reporte);
+                intent.putExtra("pais", pais);
+
                 startActivity(intent);
 
             }

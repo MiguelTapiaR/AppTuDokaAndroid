@@ -46,17 +46,22 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
     private ArrayList<Proyecto> alProyectos;
     ProgressDialog progress;
     private static final String TAG = "DocSnippets";
+    private String pais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_envio);
         getUser();
+
+        pais = getIntent().getExtras().getString("pais");
         progress= new ProgressDialog(this);
 
         progress.setTitle(R.string.cargando);
 
         progress.show();
+
+
         reporteEnvio = new ReporteEnvio();
         reporteEnvio.setAlPiezas(new ArrayList<Pieza>());
         reporteEnvio.setAlListasCarga(new ArrayList<String>());
@@ -149,6 +154,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
                 }else{
                     Intent intent = new Intent(getApplicationContext(), MostrarDatosEnvioActivity.class);
                     intent.putExtra("reporte", reporteEnvio);
+                    intent.putExtra("pais", pais);
                     startActivity(intent);
                 }
 
@@ -169,7 +175,9 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("hola2", document.getId() + " => " + document.getData());
 
-                                alCliente.add(new Cliente(document.getId(),document.getString("nombre"),document.getString("numero"),document.getString("pais")));
+                                if(document.getString("pais").matches(pais)) {
+                                    alCliente.add(new Cliente(document.getId(), document.getString("nombre"), document.getString("numero"), document.getString("pais")));
+                                }
                             }
                             onFirebaseLoadSuccess(alCliente);
                         } else {
@@ -187,8 +195,11 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
 
-                                alProyectos.add(new Proyecto(document.getString("cliente"),document.getId(),document.getString("nombre"),document.getString("numero"), document.getString("pais")));
-                            }
+                                if(document.getString("pais").matches(pais)) {
+                                    alProyectos.add(new Proyecto(document.getString("cliente"), document.getId(), document.getString("nombre"), document.getString("numero"), document.getString("pais")));
+                                }
+                                }
+
                             onFirebaseLoadSuccessProyecto(alProyectos);
                         } else {
                             //TODO TOast avisando error
@@ -199,6 +210,7 @@ public class DatosEnvioActivity extends AppCompatActivity implements IfFirebaseL
 
 
     }
+
 
     @Override
     public void onFirebaseLoadSuccess(List<Cliente> clienteList) {

@@ -9,10 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ReporteObraActivity extends AppCompatActivity {
 
+    private String pais;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reporte_obra);
+        pais = getIntent().getExtras().getString("pais");
 
         Button capacitacion = findViewById(R.id.btn_reporte_capacitacion);
 
@@ -20,7 +22,7 @@ public class ReporteObraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DatosCapacitacionActivity.class);
-
+                intent.putExtra("pais", pais);
                 startActivity(intent);
             }
         });
@@ -29,6 +31,7 @@ public class ReporteObraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DatosSeguimientoActivity.class);
+                intent.putExtra("pais", pais);
 
                 startActivity(intent);
             }
