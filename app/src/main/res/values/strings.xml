@@ -94,7 +94,9 @@
     <string name="generando_pdf">Generando PDF</string>
     <string name="error_mail">Escribe al menos un email</string>
     <string name="reporte_generado_exito">Reporte generado con éxito</string>
-<!--    <string name=""></string>-->
+    <string name="ver_reporte">Ver reporte</string>
+
+    <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->

@@ -1,5 +1,6 @@
 package com.panteranegra.tudoka;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 import androidx.annotation.Nullable;
@@ -24,10 +25,16 @@ public class MenuActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String userId, nombreUser, emailUser, paisUser;
     private static final String TAG = "DocSnippets";
+    ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        progress= new ProgressDialog(this);
+
+        progress.setTitle(R.string.cargando);
+
+        progress.show();
 
         getUser();
         // Botones
@@ -109,6 +116,7 @@ public class MenuActivity extends AppCompatActivity {
                     Log.d(TAG, source + " data: " + snapshot.getData());
                     nombreUser = snapshot.getString("nombre");
                     paisUser = snapshot.getString("pais");
+                    progress.dismiss();
                 } else {
                     Log.d(TAG, source + " data: null");
                 }

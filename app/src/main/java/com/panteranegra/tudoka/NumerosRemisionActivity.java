@@ -585,7 +585,7 @@ public class NumerosRemisionActivity extends AppCompatActivity {
         //items
         map.put("items",aux.convertirALItemstoJSON(reporte.getAlPiezas()));
         JSONObject jsonObject = new JSONObject(map);
-        String url = "https://www.themyt.com/reportedoka/reporte_envioAndroid.php";
+        String url = "https://www.themyt.com/reportedoka/reporte_envioAndroid_v3_0.php";
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, jsonObject,
@@ -600,10 +600,16 @@ public class NumerosRemisionActivity extends AppCompatActivity {
                             estado= response.getInt("estado");
 
                             String respuesta= response.getString("respuesta");
+                            String reporteId= response.getString("reporte_id");
+                            String tipo= response.getString("tipoReporte");
                             Toast.makeText(getApplicationContext(),respuesta, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), EnviarMailsActivity.class);
                             //para pasar el modelo
-                            intent.putExtra("urlReporte", "pdfs/"+idReporteGenerado+".pdf");
+                            intent.putExtra("urlReporte", "pdfs/"+reporteId+".pdf");
+                            intent.putExtra("pais", paisUser);
+                            intent.putExtra("email", emailUser);
+                            intent.putExtra("nombre", nombreUser);
+                            intent.putExtra("tipo", tipo);
                             startActivity(intent);
 
 

@@ -292,7 +292,7 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
         map.put("paisUsuario", paisUser);
         map.put("nombreCurso", reporte.getNombreCurso());
         JSONObject jsonObject = new JSONObject(map);
-        String url = "https://www.themyt.com/reportedoka/reporteCapacitacionAndroid.php";
+        String url = "https://www.themyt.com/reportedoka/reporteCapacitacionAndroid_v3_0.php";
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, jsonObject,
@@ -307,10 +307,17 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
                             estado= response.getInt("estado");
 
                             String respuesta= response.getString("respuesta");
+                            String reporteId= response.getString("reporte_id");
+                            String tipo= response.getString("tipoReporte");
                             Toast.makeText(getApplicationContext(),respuesta, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), EnviarMailsActivity.class);
                             //para pasar el modelo
-                            intent.putExtra("urlReporte", "reportecapacitacion/"+idReporteGenerado+".pdf");
+                            intent.putExtra("urlReporte", "reportecapacitacion/"+reporteId+".pdf");
+                            intent.putExtra("pais", paisUser);
+                            intent.putExtra("email", emailUser);
+                            intent.putExtra("nombre", nombreUser);
+                            intent.putExtra("tipo", tipo);
+//                            intent.putExtra("urlReporte", "reportecapacitacion/"+idReporteGenerado+".pdf");
                             startActivity(intent);
 
 

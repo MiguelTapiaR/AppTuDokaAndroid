@@ -2,6 +2,7 @@ package com.panteranegra.tudoka;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +41,9 @@ public class EnviarMailsActivity extends AppCompatActivity {
 
 
     EditText etEmail1,etEmail2,etEmail3;
-    Button btnEnviar, btnSalir;
+    Button btnEnviar, btnSalir, btnVerReporte;
     ProgressDialog progress;
+    String paisUser, nombreUser, emailUser;
 
 
     @Override
@@ -50,12 +52,24 @@ public class EnviarMailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enviar_reporte);
 
         urlReporte = (String) getIntent().getStringExtra("urlReporte");
+        paisUser = (String) getIntent().getStringExtra("pais");
+        nombreUser = (String) getIntent().getStringExtra("nombre");
+        emailUser = (String) getIntent().getStringExtra("email");
+        tipoReporte = (String) getIntent().getStringExtra("tipo");
         progress= new ProgressDialog(this);
 
         etEmail1 = findViewById(R.id.et_email1);
         etEmail2 = findViewById(R.id.et_email2);
         etEmail3 = findViewById(R.id.et_email3);
 
+        btnVerReporte = findViewById(R.id.btn_ver_reporte);
+        btnVerReporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://themyt.com/reportedoka/"+urlReporte));
+                startActivity(browserIntent);
+            }
+        });
         btnEnviar = findViewById(R.id.btn_enviar_correos);
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,8 +121,12 @@ public class EnviarMailsActivity extends AppCompatActivity {
         map.put("emails", aux.convertirALEmailstoJSON(alMails));
         map.put("urlReporte", urlReporte);
 
+        map.put("paisUsuario", paisUser);
+        map.put("nombreUsuario", nombreUser);
+        map.put("emailUsuario", emailUser);
+        map.put("tipo", tipoReporte);
         JSONObject jsonObject = new JSONObject(map);
-        String url = "https://www.themyt.com/reportedoka/enviar_reporte.php";
+        String url = "https://www.themyt.com/reportedoka/enviar_reporte_v3_0.php";
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, jsonObject,
