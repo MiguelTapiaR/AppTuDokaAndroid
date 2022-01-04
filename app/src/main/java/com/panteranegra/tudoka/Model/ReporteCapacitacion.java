@@ -8,6 +8,8 @@ public class ReporteCapacitacion implements Serializable {
     private Proyecto proyecto;
     private String nombreCurso;
 
+    private String urlFirma;
+
     private ArrayList<Actividad> alActividad;
 
     public Cliente getCliente() {
@@ -40,5 +42,13 @@ public class ReporteCapacitacion implements Serializable {
 
     public void setNombreCurso(String nombreCurso) {
         this.nombreCurso = nombreCurso;
+    }
+
+    public String getUrlFirma() {
+        return urlFirma;
+    }
+
+    public void setUrlFirma(String urlFirma) {
+        this.urlFirma = urlFirma;
     }
 }

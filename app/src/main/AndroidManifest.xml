@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DrawImageActivity"></activity>
+        <activity
+            android:name=".FirmaCapacitacionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FirmaSeguimientoActivity"
+            android:exported="false" />
+        <activity android:name=".DrawImageActivity" />
         <activity android:name=".VistaItemActivity" />
         <activity android:name=".ResumenItemsEnvioActivity" />
         <activity android:name=".AgregarItemDevolucionActivity" />
@@ -37,9 +43,7 @@
         <activity android:name=".AgregarActividadSeguimientoActivity" />
         <activity android:name=".ResumenActividadesSeguimientoActivity" />
         <activity android:name=".DatosDano" />
-
         <activity android:name=".MostrarDatosDanoActivity" />
-
         <activity android:name=".AgregarItemDanoActivity" />
         <activity android:name=".ResumenItemsDanoActivity" />
         <activity android:name=".MostrarDatosCapacitacionActivity" />
@@ -48,8 +52,6 @@
         <activity android:name=".EnviarMailsActivity" />
         <activity android:name=".utils.DatosTransporteEnvioActivity" />
         <activity android:name=".LoginActivity" />
-
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +59,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

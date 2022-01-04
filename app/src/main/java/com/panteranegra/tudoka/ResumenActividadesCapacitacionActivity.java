@@ -112,10 +112,10 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
 //                //para pasar el modelo
 //                intent.putExtra("reporte", reporte);
 //                startActivity(intent);
-                progress.show();
-//                continuarBtn.setEnabled(false);
-
-                crearReporte();
+                Intent intent = new Intent(getApplicationContext(), FirmaCapacitacionActivity.class);
+//                //para pasar el modelo
+                intent.putExtra("reporte", reporte);
+                startActivity(intent);
             }
         });
     }
@@ -277,7 +277,6 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
 
         progress.setMessage(getString(R.string.generando_pdf));
         ArrayList<String> emails = new ArrayList<>();
-        emails.add("rmontoya@themyt.com");
         HashMap<String, Object> map = new HashMap<>();// Mapeo previo
         Auxiliares aux = new Auxiliares();
         map.put("items", aux.convertirALtoJSON(reporte.getAlActividad()));
@@ -317,6 +316,8 @@ public class ResumenActividadesCapacitacionActivity extends AppCompatActivity {
                             intent.putExtra("email", emailUser);
                             intent.putExtra("nombre", nombreUser);
                             intent.putExtra("tipo", tipo);
+                            intent.putExtra("nombreProyecto", reporte.getProyecto().getNombre());
+                            intent.putExtra("idReporte", reporteId);
 //                            intent.putExtra("urlReporte", "reportecapacitacion/"+idReporteGenerado+".pdf");
                             startActivity(intent);
 

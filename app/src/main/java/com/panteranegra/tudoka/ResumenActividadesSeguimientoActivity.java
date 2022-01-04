@@ -96,10 +96,14 @@ public class ResumenActividadesSeguimientoActivity extends AppCompatActivity {
         continuarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progress.show();
+                //progress.show();
 //                continuarBtn.setEnabled(false);
 
-                crearReporte();
+                //crearReporte();
+                Intent intent = new Intent(getApplicationContext(), FirmaSeguimientoActivity.class);
+//                //para pasar el modelo
+                intent.putExtra("reporte", reporte);
+                startActivity(intent);
             }
         });
 

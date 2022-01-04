@@ -592,6 +592,8 @@ public class ResumenItemsDevolucionActivity extends AppCompatActivity {
                             intent.putExtra("pais", paisUser);
                             intent.putExtra("email", emailUser);
                             intent.putExtra("nombre", nombreUser);
+                            intent.putExtra("nombreProyecto", reporte.getProyecto().getNombre());
+                            intent.putExtra("idReporte", reporteId);
                             intent.putExtra("tipo", tipo);
 //                            intent.putExtra("urlReporte", "pdfs/"+idReporteGenerado+".pdf");
                             startActivity(intent);

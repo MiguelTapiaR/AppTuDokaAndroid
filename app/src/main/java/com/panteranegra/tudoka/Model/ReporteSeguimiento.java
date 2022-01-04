@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class ReporteSeguimiento implements Serializable {
     private Cliente cliente;
     private Proyecto proyecto;
+    private String urlFirma;
 
     private ArrayList<Actividad> alActividad;
 
@@ -31,5 +32,13 @@ public class ReporteSeguimiento implements Serializable {
 
     public void setAlActividad(ArrayList<Actividad> alActividad) {
         this.alActividad = alActividad;
+    }
+
+    public String getUrlFirma() {
+        return urlFirma;
+    }
+
+    public void setUrlFirma(String urlFirma) {
+        this.urlFirma = urlFirma;
     }
 }

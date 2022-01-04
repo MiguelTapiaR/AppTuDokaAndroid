@@ -1,5 +1,10 @@
 package com.panteranegra.tudoka;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,13 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -36,13 +35,11 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.panteranegra.tudoka.Adapters.ItemsAdapter;
+import com.kyanogen.signatureview.SignatureView;
 import com.panteranegra.tudoka.Model.Actividad;
 import com.panteranegra.tudoka.Model.Auxiliares;
 import com.panteranegra.tudoka.Model.MySingleton;
-import com.panteranegra.tudoka.Model.Pieza;
-import com.panteranegra.tudoka.Model.ReporteDano;
-import com.panteranegra.tudoka.Model.ReporteDevolucion;
+import com.panteranegra.tudoka.Model.ReporteCapacitacion;
 import com.panteranegra.tudoka.Model.ReporteSeguimiento;
 
 import org.json.JSONException;
@@ -53,63 +50,77 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResumenItemsDanoActivity extends AppCompatActivity {
+public class FirmaCapacitacionActivity extends AppCompatActivity {
 
-    ItemsAdapter adapter;
+    ReporteCapacitacion reporte;
 
-    private static final String TAG = "DocSnippets";
-    Button continuarBtn;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private SignatureView signatureView;
+    private Button mClearButton;
+    private Button mSaveButton;
+    private Button continuar;
 
-    ListView contenido;
-    ReporteDano reporte;
-    private FirebaseAuth mAuth;
-    String userId, nombreUser, emailUser, paisUser;
     String idReporteGenerado="";
     ProgressDialog progress;
     int flag=0;
-    EditText numeroDevolucion;
+
+    private FirebaseAuth mAuth;
 
 
+    String userId, nombreUser, emailUser, paisUser, puestoUser;
+
+    private static final String TAG = "DocSnippets";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resumen_items_dano);
+        setContentView(R.layout.activity_firma_capacitacion);
         getUser();
-        reporte = (ReporteDano) getIntent().getExtras().getSerializable("reporte");
+        setContentView(R.layout.activity_firma_seguimiento);
 
-        numeroDevolucion = (EditText) findViewById(R.id.et_no_devolucion_dano);
+        setTitle("Firma del cliente");
         progress= new ProgressDialog(this);
 
         progress.setTitle(getString(R.string.guardando));
-        contenido = findViewById(R.id.list_view_items);
-        adapter = new ItemsAdapter(getApplicationContext(),reporte.getAlPiezas());
-        contenido.setAdapter(adapter);
+        //recibir el modelo
+        reporte = (ReporteCapacitacion) getIntent().getExtras().getSerializable("reporte");
 
-        Button nuevoItemBTN = findViewById(R.id.button7);
-        nuevoItemBTN.setOnClickListener(new View.OnClickListener() {
+
+        signatureView = (SignatureView) findViewById(R.id.signature_view);
+        mClearButton = (Button) findViewById(R.id.clear_button);
+        mSaveButton = (Button) findViewById(R.id.guardar);
+        continuar = (Button) findViewById(R.id.sin_firma);
+
+        mClearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AgregarItemDanoActivity.class);
-//                //para pasar el modelo
-                intent.putExtra("reporte", reporte);
-                startActivity(intent);
+                signatureView.clearCanvas();
             }
         });
 
-        continuarBtn = findViewById(R.id.button8);
-        continuarBtn.setOnClickListener(new View.OnClickListener() {
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                if(numeroDevolucion.getText().toString().matches("")){
-                    Toast.makeText(getApplicationContext(),"Por favor ingresa un número de devolución", Toast.LENGTH_LONG);
-                }else{
-                    progress.show();
-                    crearReporte();
-                }
+                progress.show();
+                crearReporte();
 
+            }
+        });
+
+        continuar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progress.show();
+                crearReporte();
             }
         });
     }
+
+
+
+
+
 
 
     public void getUser(){
@@ -140,12 +151,15 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
                     Log.d(TAG, source + " data: " + snapshot.getData());
                     nombreUser = snapshot.getString("nombre");
                     paisUser = snapshot.getString("pais");
+
                 } else {
                     Log.d(TAG, source + " data: null");
                 }
             }
         });
     }
+
+    //**** GUARDADO REPORTE***//
 
     public void crearReporte(){
         progress.setMessage("Guardando en Base de Datos");
@@ -161,14 +175,21 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         // Get new Instance ID token
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("reportesDano")
+        db.collection("reportesCapacitacion")
                 .add(docData)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         idReporteGenerado = documentReference.getId();
-                        cargaFotos();
+
+                        if(!signatureView.isBitmapEmpty()){
+                            subirFirma();
+                        }else{
+                            cargaFotos();
+                        }
+
+
 
                     }
                 })
@@ -180,31 +201,19 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
                 });
 
     }
-    public Boolean cargaFotos(){
-        for(Pieza actividad: reporte.getAlPiezas()){
-            subirFotos(actividad);
-        }
-        return true;
-    }
 
-    public void subirFotos(final Pieza actividad){
-
-
-
+    private void subirFirma(){
+        progress.setMessage("Cargando firma...");
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         StorageReference storageRef = storage.getReference();
-        final String urlDescarga="";
-        // Get the data from an ImageView as bytes
-
         Auxiliares auxiliares = new Auxiliares();
-        Bitmap bm =auxiliares.getImageResized(getApplicationContext(), Uri.fromFile(new File(actividad.getFotoItemResumen())));
+        Bitmap bitmap = signatureView.getSignatureBitmap();
 
-        Uri file = auxiliares.getImageUri(getApplicationContext(),bm);
+        Uri file = auxiliares.getImageUri(getApplicationContext(),bitmap);
 
-        String[] aNombre= actividad.getFotoItemResumen().split("/");
-        int indexNombre=(aNombre.length)-1;
-        final StorageReference ref = storageRef.child("imagesSeguimientopb/"+aNombre[indexNombre]);
+        //String[] aNombre= file.split("/");
+        final StorageReference ref = storageRef.child("imagesCapacitacion/"+idReporteGenerado+"/firmaCliente");
         UploadTask uploadTask = ref.putFile(file);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -223,7 +232,67 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
-                    actividad.setUrl(downloadUri.toString());
+                    reporte.setUrlFirma(downloadUri.toString());
+                    cargaFotos();
+
+
+
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
+    }
+    public Boolean cargaFotos(){
+        progress.setMessage("Cargando fotos...");
+
+
+
+        for(Actividad actividad: reporte.getAlActividad()){
+            subirFotos(actividad);
+        }
+        return true;
+    }
+
+    public void subirFotos(final Actividad actividad){
+
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        StorageReference storageRef = storage.getReference();
+        final String urlDescarga="";
+        // Get the data from an ImageView as bytes
+
+        Auxiliares auxiliares = new Auxiliares();
+        Bitmap bm =auxiliares.getImageResized(getApplicationContext(), Uri.fromFile(new File(actividad.getImagen())));
+
+        Uri file = auxiliares.getImageUri(getApplicationContext(),bm);
+
+        String[] aNombre= actividad.getImagen().split("/");
+        int indexNombre=(aNombre.length)-1;
+        final StorageReference ref = storageRef.child("imagesCapacitacion/"+idReporteGenerado+"/"+aNombre[indexNombre]);
+        UploadTask uploadTask = ref.putFile(file);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+
+                return ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    actividad.setUrlDescarga(downloadUri.toString());
 
                     actualizarBD(actividad);
 
@@ -236,13 +305,12 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         });
 
     }
-    private void actualizarBD(Pieza actividad){
+    private void actualizarBD(Actividad actividad){
         Map<String, Object> docData = new HashMap<>();
-        docData.put("descripcion", actividad.getDescripcion());
-        docData.put("tipoDano", actividad.getTipoDano());
-        docData.put("foto", actividad.getUrl());
+        docData.put("descripcion", actividad.getDesripcion());
+        docData.put("foto", actividad.getUrlDescarga());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("reportesDano/"+idReporteGenerado+"/items/")
+        db.collection("reportesCapacitacion/"+idReporteGenerado+"/actividades/")
                 .add(docData)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -250,7 +318,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
 
                         flag++;
-                        if(flag==reporte.getAlPiezas().size()){
+                        if(flag==reporte.getAlActividad().size()){
                             crearPDF();
                         }
 
@@ -273,10 +341,11 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
 
         progress.setMessage(getString(R.string.generando_pdf));
         ArrayList<String> emails = new ArrayList<>();
-        emails.add("rmontoya@themyt.com");
+        emails.add("r.seguimiento.tudoka@themyt.com");
         HashMap<String, Object> map = new HashMap<>();// Mapeo previo
         Auxiliares aux = new Auxiliares();
-        map.put("items", aux.convertirALItemstoJSON(reporte.getAlPiezas()));
+
+        map.put("items", aux.convertirALtoJSON(reporte.getAlActividad()));
         map.put("reporteId",idReporteGenerado );
         map.put("emails",emails );
         map.put("nombreCliente", reporte.getCliente().getNombre());
@@ -286,9 +355,11 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         map.put("nombreUsuario", nombreUser);
         map.put("emailUsuario", emailUser);
         map.put("paisUsuario", paisUser);
-        map.put("numeroDevolucion", numeroDevolucion.getText().toString());
+        map.put("nombreCurso", reporte.getNombreCurso());
+        map.put("urlFirma", reporte.getUrlFirma());
         JSONObject jsonObject = new JSONObject(map);
-        String url = "https://www.themyt.com/reportedoka/reporte_danoAndroid_v3_0.php";
+        String url = "https://www.themyt.com/reportedoka/reporteCapacitacionAndroid_v4_0.php";
+
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, jsonObject,
@@ -308,14 +379,16 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),respuesta, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), EnviarMailsActivity.class);
                             //para pasar el modelo
-                            intent.putExtra("urlReporte", "pdfs/"+reporteId+".pdf");
+                            intent.putExtra("urlReporte", "reportecapacitacion/"+reporteId+".pdf");
                             intent.putExtra("pais", paisUser);
                             intent.putExtra("email", emailUser);
                             intent.putExtra("nombre", nombreUser);
                             intent.putExtra("nombreProyecto", reporte.getProyecto().getNombre());
                             intent.putExtra("idReporte", reporteId);
                             intent.putExtra("tipo", tipo);
-//                            intent.putExtra("urlReporte", "pdfs/"+idReporteGenerado+".pdf");
+
+
+
                             startActivity(intent);
 
 
@@ -350,4 +423,7 @@ public class ResumenItemsDanoActivity extends AppCompatActivity {
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
 
     }
+
+
+
 }

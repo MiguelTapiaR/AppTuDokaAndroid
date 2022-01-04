@@ -43,6 +43,17 @@ public class MenuActivity extends AppCompatActivity {
         danoBTN = findViewById(R.id.reporte_dano);
         obra = findViewById(R.id.reporte_obra);
         logout = findViewById(R.id.logout);
+
+        Button firma = findViewById(R.id.firma);
+        firma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FirmaSeguimientoActivity.class);
+                intent.putExtra("pais", paisUser);
+                startActivity(intent);
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
 
 

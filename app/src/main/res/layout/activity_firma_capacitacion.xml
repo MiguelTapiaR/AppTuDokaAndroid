@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FirmaCapacitacionActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height= "wrap_content"
+
+
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Firma en el recuadro blanco"
+            android:textColor="@color/azul"
+            />
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Borrar"
+            android:textColor="@color/rojo"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#666"
+        android:padding="10dp">
+
+
+        <com.kyanogen.signatureview.SignatureView
+            xmlns:sign="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signature_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            sign:penSize="5dp"
+            sign:backgroundColor="#ffffff"
+            sign:penColor="@color/azul"
+            sign:enableSignature="true"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D6D7D7"
+        android:text="Guardar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#004a8e"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:id="@+id/sin_firma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D6D7D7"
+        android:text="Continuar sin firma"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#004a8e"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="30dp" />
+
+
+
+</LinearLayout>
